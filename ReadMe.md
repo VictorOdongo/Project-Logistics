@@ -35,10 +35,6 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 5. Push your changes to your forked repository.
 6. Create a pull request to merge your changes into the main repository.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
-For any questions or inquiries, please contact [your-email@example.com](mailto:your-email@example.com).
+For any questions or inquiries, please contact [victorodongo397@example.com](mailto:your-email@example.com).
