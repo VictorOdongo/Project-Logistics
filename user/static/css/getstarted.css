@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    transition: 0.5s;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    align-items: center;
+}
+.content{
+    width: 1300px;
+    height: 100vh;
+    margin: auto;
+}
+.content h3{
+    color: #058283;
+    padding-top: 100px;
+    font-weight: 400;
+
+}
