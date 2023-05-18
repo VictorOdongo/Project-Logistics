@@ -37,4 +37,4 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 
 ## Contact
 
-For any questions or inquiries, please contact [victorodongo397@example.com](mailto:your-email@example.com).
+For any questions or inquiries, please contact [victorodongo397@gmail.com](mailto:your-email@example.com).
