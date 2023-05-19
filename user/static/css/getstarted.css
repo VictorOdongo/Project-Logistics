@@ -1,11 +1,4 @@
 *{
-  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-}
-.container {
-  background-color: #fff; 
-  padding: 20px;
-  border: 1px solid #ccc; 
 }
