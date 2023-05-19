@@ -2,3 +2,14 @@
   justify-content: center;
   align-items: center;
 }
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Adjust this if necessary */
+}
+
+.btn.btn-info.btn-lg:hover {
+  background: #fff;
+  color: #058283;
+}
