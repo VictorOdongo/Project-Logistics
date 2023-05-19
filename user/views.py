@@ -5,3 +5,6 @@ def home_view(request):
 
 def getstarted_view(request):
     return render(request, 'user/getstarted.html')
+
+def personal_view(request):
+    return render(request, 'user/personal-signup.html')
