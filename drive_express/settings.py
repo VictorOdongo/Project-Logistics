@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'drive_express.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'users',
+        'NAME':  'drive_express',
         'USER': 'postgres',
         'PASSWORD': 'victor100',
         'HOST': 'localhost',
-        'PORT': int(os.getenv('POSTGRES_PORT',5432)),
+        'PORT': '5432',
     }
 }
 
