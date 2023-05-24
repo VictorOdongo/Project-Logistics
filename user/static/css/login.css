@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 300px;
+}
+
+.login {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.btn-primary {
+  width: 100%;
+}
