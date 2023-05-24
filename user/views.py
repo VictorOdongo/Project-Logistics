@@ -17,7 +17,7 @@ def sender_view(request):
 def driver_view(request):
     return render(request, 'user/driver-signup.html')
 
-def register(request):
+def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
