@@ -17,6 +17,12 @@ def business_view(request):
 def driver_view(request):
     return render(request, 'user/driver-signup.html')
 
+def drive_view(request):
+    return render(request, 'user/driver-login.html')
+
+def send_view(request):
+    return render(request, 'user/sender-login.html')
+
 def sendgig_view(request):
     return render(request, 'user/sendgig.html')
 
