@@ -31,8 +31,7 @@
             </h1>
           </div>
           <div class="sign-in">
-            <a href="sender-login.html"
-              ><button
+            <a href="{% url 'sender-login' %}"><button
                 type="button"
                 class="btn btn-info btn-lg"
                 style="margin-right: 20px; width: 120px; height: 45px"
@@ -40,7 +39,7 @@
                 Send
               </button></a
             >
-            <a href="driver-login.html"
+            <a href="{% url 'driver-login' %}"
               ><button
                 type="button"
                 class="btn btn-info btn-lg"

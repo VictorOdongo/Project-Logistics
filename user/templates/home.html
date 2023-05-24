@@ -14,9 +14,9 @@
                 <nav>
                     <ul>
                         <li class="active">HOME</li>
-                        <li><a href="entreprise-signup.html">ENTREPRISE</a></li>
-                        <li><a href="personal-signup.html">PERSONAL</a></li>
-                        <li><a href="drivers-signup.html">DRIVERS</a></li>
+                        <li><a href="{% url 'user:business-signup' %}">ENTREPRISE</a></li>
+                        <li><a href="{% url 'user:personal-signup' %}">PERSONAL</a></li>
+                        <li><a href="{% url 'user:driver-signup' %}">DRIVERS</a></li>
                         <li><a href="{% url 'user:getstarted' %}"><button class="btn">GET STARTED</button></a></li>
                         
                     </ul>
