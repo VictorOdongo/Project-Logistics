@@ -11,11 +11,19 @@ def getstarted_view(request):
 def personal_view(request):
     return render(request, 'user/personal-signup.html')
 
-def sender_view(request):
-    return render(request, 'user/sender-signup.html')
+def business_view(request):
+    return render(request, 'user/entreprise-signup.html')
 
 def driver_view(request):
     return render(request, 'user/driver-signup.html')
+
+def sendgig_view(request):
+    return render(request, 'user/sendgig.html')
+
+def drivegig_view(request):
+    return render(request, 'user/drivegig.html')
+
+
 
 def register_view(request):
     if request.method == 'POST':
