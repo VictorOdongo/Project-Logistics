@@ -1,4 +1,3 @@
-{% extends 'user/home.html' %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Personl Sign Up</title>
-    <link href="{% static '/user/user.css'%}" rel="stylesheet" type="text/css" />
+    <link
+      href="{% static '/user/user.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -15,20 +18,17 @@
   </head>
   <body>
     <div class="header">
-      <h1>Delivery for individuals</h1>
-      <br />
-      <h3>Create an account and get your stuff where it needs to go.</h3>
+      <h2>Individual Sign Up</h2>
     </div>
     <div class="wrapper">
-      <h2>Sign Up</h2>
+      <h3>Create an account and get your stuff where it needs to go.</h3>
       <form action="#">
         <input type="text" placeholder="First Name" />
         <input type="text" placeholder="Last Name" />
         <input type="text" placeholder="ID" />
-        <input type="text" placeholder="Email Address" />
         <input type="tel" placeholder="Mobile Number" />
+        <input type="email" placeholder="Email Address" />
         <input type="password" placeholder="Password" />
-        <input type="password" placeholder="Re-Enter Password" />
       </form>
       <div class="terms">
         <input type="checkbox" id="checkbox" />
@@ -39,7 +39,7 @@
       </div>
       <button>Sign Up</button>
       <div class="member">
-        Have an account? <a href="login.html">Login Here</a>
+        Have an account? <a href="sender-login.html">Login Here</a>
       </div>
     </div>
   </body>
