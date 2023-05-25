@@ -47,11 +47,12 @@ def register(request):
         
         # Create User object
         user = User.objects.create_user(
-            username=id,
+            username=email,
             password=password,
             first_name=firstname,
             last_name=lastname,
-            email=email
+            email=email,
+            mobile=mobile
         )
         
         user.save()
@@ -62,7 +63,7 @@ def register(request):
         # Replace 'success' with your desired URL or view name
         
               
-    return render(request, 'registration.html')
+    return render(request, 'sendgig.html')
         
         
         
