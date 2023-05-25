@@ -59,6 +59,16 @@ form input {
     border-radius: 20px;
     background: #e4e4e4;
 }
+form select {
+    width: 92%;
+    outline: none;
+    border: 1px solid #fff;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background: #e4e4e4;
+}
+
 button {
     font-size: 1rem;
     margin-top: 1.2rem;
@@ -76,6 +86,9 @@ button:hover {
     color: #058283;
 }
 input:focus {
+    border: 1px solid rgb(192, 192, 192);
+}
+select:focus {
     border: 1px solid rgb(192, 192, 192);
 }
 .terms {

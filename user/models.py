@@ -14,6 +14,7 @@ class Personal(models.Model):
     
 class Entreprise(models.Model):
     businessname = models.CharField(max_length=20, blank=False, unique=True)
+    businesssize = models.IntegerField(blank=False)
     firstname = models.CharField(max_length=10, blank=False)
     lastname = models.CharField(max_length=10, blank=False)
     id = models.AutoField(primary_key=True, blank=False,unique=True)
@@ -24,7 +25,7 @@ class Entreprise(models.Model):
 class Driver(models.Model):
     firstname = models.CharField(max_length=10, blank=False)
     lastname = models.CharField(max_length=10, blank=False)
-    id = models.AutoField(blank=False,unique=True)
+    id = models.CharField(blank=False,unique=True)
     licence = models.CharField(max_length=10, blank=False, primary_key=True, unique=True)
     mobile = models.IntegerField(null=False, blank=False)
     email = models.EmailField(max_length=20, blank=False, unique=True)
