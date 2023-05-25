@@ -25,7 +25,7 @@ body {
 }
 .wrapper {
     width: 330px;
-    height: 580px;
+    height:700px;
     padding: 2rem 1rem;
     margin: 0 auto;
     margin-top: 8px;
@@ -36,7 +36,7 @@ body {
 }
 .wrapper2 {
     width: 330px;
-    height: 300px;
+    height: 400px;
     padding: 2rem 1rem;
     margin: 50px auto;
     background-color: #fff;
@@ -51,15 +51,6 @@ h2 {
     margin-bottom: 2em;
 }
 form input {
-    width: 92%;
-    outline: none;
-    border: 1px solid #fff;
-    padding: 12px 20px;
-    margin-bottom: 10px;
-    border-radius: 20px;
-    background: #e4e4e4;
-}
-form select {
     width: 92%;
     outline: none;
     border: 1px solid #fff;
@@ -86,9 +77,6 @@ button:hover {
     color: #058283;
 }
 input:focus {
-    border: 1px solid rgb(192, 192, 192);
-}
-select:focus {
     border: 1px solid rgb(192, 192, 192);
 }
 .terms {
