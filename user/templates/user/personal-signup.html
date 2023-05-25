@@ -20,15 +20,26 @@
     <div class="header">
       <h2>Individual Sign Up</h2>
     </div>
+    <div>
+      <style>
+        h5 {
+          color: coral;
+        }
+      </style>
+      {% for message in messages %}
+      <h5>{{message}}</h5>
+      {% endfor %}
+    </div>
     <div class="wrapper">
       <h3>Create an account and get your stuff where it needs to go.</h3>
-      <form action="#">
-        <input type="text" placeholder="First Name" />
-        <input type="text" placeholder="Last Name" />
-        <input type="text" placeholder="ID" />
-        <input type="tel" placeholder="Mobile Number" />
-        <input type="email" placeholder="Email Address" />
-        <input type="password" placeholder="Password" />
+      <form action="#" method="POST">
+        {% csrf_token %}
+        <input type="text" name="firstname" placeholder="First Name" />
+        <input type="text" name="lastname" placeholder="Last Name" />
+        <input type="text" name="id" placeholder="ID" />
+        <input type="tel" name="mobile" placeholder="Mobile Number" />
+        <input type="email" name="email" placeholder="Email Address" />
+        <input type="password" name="password" placeholder="Password" />
       </form>
       <div class="terms">
         <input type="checkbox" id="checkbox" />

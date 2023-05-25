@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib import messages, auth
+from user import Personal
+
 
 def home_view(request):
     return render(request, 'home.html')
@@ -31,17 +35,31 @@ def drivegig_view(request):
 
 
 
-def register_view(request):
+def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('home')  # Redirect to your desired page
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
-
+        # Retrieve form data
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        id = request.POST['id']
+        mobile = request.POST['mobile']
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        # Create User object
+        user = User.objects.create_user(
+            username=id,
+            password=password,
+            first_name=firstname,
+            last_name=lastname,
+            email=email
+        )
+        
+        
+        
+        
+        
+        
+        
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
