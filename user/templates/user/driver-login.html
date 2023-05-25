@@ -1,5 +1,4 @@
-{% extends 'user/getstarted.html' %}
-{% block content %}
+ {% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,42 +11,25 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <link rel="stylesheet" href="{% static '/user/login.css'%}" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="{% static '/user/user.css'%}"
+      type="text/css"
+    />
   </head>
   <body>
-    <form>
-      {% csrf_token %}
-      <div class="container">
-        <div class="h1">
-          <h1>Driver Sign in</h1>
-        </div>
-        <div class="login">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-        </div>
-
-        <div class="login">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-
-        <button type="submit" class="btn btn-primary">login</button>
+    <div class="wrapper2">
+      <h2>Driver Sign In</h2><br>
+      <form action="#">
+        {% csrf_token %}
+        <input type="text" placeholder="Email Address" />
+        <input type="password" placeholder="Password" />
+      </form>
+      <button>Sign In</button>
+      <div class="member">
+        New to DriveX? <a href="registration.html">Register Now</a>
       </div>
-    </form>
-
-    <script src=""></script>
-    
+    </div>
   </body>
 </html>
 {% endblock %}
