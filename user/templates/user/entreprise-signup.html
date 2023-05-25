@@ -21,9 +21,16 @@
       <h2>Business Sign Up</h2>
     </div>
     <div class="wrapper">
-      <h3>Post deliveries in minutes.<br>Create your account in seconds.</h3>
+      <h3>Post deliveries in minutes.<br />Create your account in seconds.</h3>
       <form action="#">
         <input type="text" placeholder="Business Name" />
+        <input type="text" id="inputField" placeholder="Business Size" />
+        <select id="dropdownField" name="dropdownField">
+          <option value="" disabled selected>Input size</option>
+          <option value="1-5">1-5</option>
+          <option value="6-10">6-10</option>
+          <option value="beyond 10">Beyond 10</option>
+        </select>
         <input type="text" placeholder="First Name" />
         <input type="text" placeholder="Last Name" />
         <input type="tel" placeholder="Mobile Number" />

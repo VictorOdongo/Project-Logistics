@@ -5,12 +5,31 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Personal(models.Model):
-    firstname = models.CharField(max_length=10)
-    lastname = models.CharField(max_length=10)
-    id = models.AutoField(primary_key=True)
-    mobile = models.IntegerField()
-    email = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
+    firstname = models.CharField(max_length=10, blank=False)
+    lastname = models.CharField(max_length=10, blank=False)
+    id = models.AutoField(primary_key=True, blank=False,unique=True)
+    mobile = models.IntegerField(null=False, blank=False)
+    email = models.EmailField(max_length=20, blank=False, unique=True)
+    password = models.CharField(max_length=20, blank=False, unique=True)
+    
+class Entreprise(models.Model):
+    businessname = models.CharField(max_length=20, blank=False, unique=True)
+    firstname = models.CharField(max_length=10, blank=False)
+    lastname = models.CharField(max_length=10, blank=False)
+    id = models.AutoField(primary_key=True, blank=False,unique=True)
+    mobile = models.IntegerField(null=False, blank=False)
+    email = models.EmailField(max_length=20, blank=False, unique=True)
+    password = models.CharField(max_length=20, blank=False, unique=True)
+    
+class Driver(models.Model):
+    firstname = models.CharField(max_length=10, blank=False)
+    lastname = models.CharField(max_length=10, blank=False)
+    id = models.AutoField(blank=False,unique=True)
+    licence = models.CharField(max_length=10, blank=False, primary_key=True, unique=True)
+    mobile = models.IntegerField(null=False, blank=False)
+    email = models.EmailField(max_length=20, blank=False, unique=True)
+    password = models.CharField(max_length=20, blank=False, unique=True)
+                
     
     
 # class CustomUser(AbstractUser):
