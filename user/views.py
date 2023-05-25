@@ -59,11 +59,11 @@ def register(request):
         print('Registration successful')
         
         # Redirect to a success page or login page
-        return redirect('/sendgig') 
+        return redirect('sendgig') 
         # Replace 'success' with your desired URL or view name
         
               
-    return render(request, 'sendgig.html')
+    return render(request, 'user/personal-signup.html')
         
         
         
