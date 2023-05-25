@@ -54,6 +54,16 @@ def register(request):
             email=email
         )
         
+        user.save()
+        print('Registration successful')
+        
+        # Redirect to a success page or login page
+        return redirect('/sendgig') 
+        # Replace 'success' with your desired URL or view name
+        
+              
+    return render(request, 'registration.html')
+        
         
         
         
