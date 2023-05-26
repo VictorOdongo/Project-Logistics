@@ -14,7 +14,7 @@ def getstarted_view(request):
 
 def personal_view(request):
     if request.method == 'POST':
-        firstname = request.POST['firstname']
+        username = request.POST['username']
         lastname = request.POST['lastname']
         mobile = request.POST['mobile']
         email = request.POST['email']
@@ -23,12 +23,10 @@ def personal_view(request):
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
             return redirect('personal_view/')
-        elif User.objects.filter(id=id).exists():
-            messages.info(request, 'id number already exists!')
-            return redirect('personal_view/')
+        
         else:
             user = User.objects.create_user(
-            first_name=firstname,
+            username=username,
             last_name=lastname,
             mobile=mobile,
             email=email,
@@ -36,8 +34,8 @@ def personal_view(request):
         )
             user.save()
             
-            user_model = User.objects.get
-            new_profile = Personal.objects.create(user=user_model, id_user=user_model.id)
+            user_model = User.objects.get(username=username)
+            new_profile = Personal.objects.create(user=user_model, username=username)
             new_profile.save()
             return redirect('sender-login/')
     
