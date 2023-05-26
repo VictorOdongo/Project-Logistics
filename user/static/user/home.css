@@ -140,7 +140,6 @@ footer p {
 .social-icons {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .social-icons a {
