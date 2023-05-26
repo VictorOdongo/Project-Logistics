@@ -1,6 +1,4 @@
-{% block content %} 
-
-{% load crispy_forms_tags %}     
+{% block content %}  
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,10 +35,8 @@
       <h3>Create an account and get your stuff where it needs to go.</h3>
       <form action="#" method="POST">
         {% csrf_token %}
-        {{ register_form|crispy }} 
-        <input type="text" name="firstname" placeholder="First Name" />
+        <input type="text" name="usernamename" placeholder="User Name" />
         <input type="text" name="lastname" placeholder="Last Name" />
-        <input type="text" name="id" placeholder="ID" />
         <input type="tel" name="mobile" placeholder="Mobile Number" />
         <input type="email" name="email" placeholder="Email Address" />
         <input type="password" name="password" placeholder="Password" />
@@ -52,7 +48,7 @@
           DriveX's <a href="#">Privacy and Terms.</a></label
         >
       </div>
-      <button>Sign Up</button>
+      <button type="submit">Sign Up</button>
       <div class="member">
         Have an account? <a href="sender-login.html">Login Here</a>
       </div>
