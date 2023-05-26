@@ -8,7 +8,7 @@
 }
 header{
   width: 100%;
-  height: 200p;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@ header{
 }
 .main{
     width: 100%;
-    height: 550px;
+    height: 420px;
     background-color: black;
     background-repeat: no-repeat;
     background-size: cover; 
@@ -39,6 +39,7 @@ nav ul li{
     color: #fff;
     font-weight: 400;
     font-size: 15px;
+    text-decoration: none;
 }
 .active{
     color: #058283;
@@ -48,7 +49,7 @@ nav ul li:hover{
 }
 .btn{
     width: 120px;
-    height: 45px;
+    height: 40px;
     border-radius: 8px;
     border: none;
     background: #058283;
@@ -56,13 +57,7 @@ nav ul li:hover{
     cursor: pointer;
     font-size: 14px;
 }
-.btn2 {
-    cursor: pointer;
-    font-size: 14px;
-}
-.btn2:hover {
-   color: #058283;
-}
+
 .btn:hover{
     background: #fff;
     color: #058283;
@@ -99,13 +94,13 @@ p{
   display: flex;
   flex-direction: row;
 }
-.img {
+/* .img {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-left: 20px;
   margin-right: 20px;
-}
+} */
 .text {
   flex: 1;
 }
