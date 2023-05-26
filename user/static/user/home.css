@@ -3,24 +3,25 @@
     margin: 0;
     padding: 0;
     transition: 0.5s;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-family: 'Poppins', sans-serif;
+}
+header{
+  width: 100%;
+  height: 200p;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
 }
 .main{
     width: 100%;
-    height: 100vh;
+    height: 550px;
     background-color: black;
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-.container{
-    width: 1600px;
-    height: 80px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-size: cover; 
+    background-position: center; 
+    margin: 100px 0 30px 30px;
 }
 .logo{
     color: #fff;
@@ -66,31 +67,25 @@ nav ul li:hover{
     background: #fff;
     color: #058283;
 }
-.content{
-    width: 1300px;
-    height: 100vh;
-    margin: auto;
-}
-.content h3{
-    color: #058283;
-    padding-top: 100px;
-    font-weight: 400;
 
+h3{
+    color: #058283;
+    font-weight: 400;
 }
-.content h1{
-    font-size: 60px;
+h1{
+    font-size: 45px;
     color: #fff;
     margin-top: 20px;
     line-height: 1;
 }
-.content p{
+p{
     color: #f1f1f1;
     font-size: 16px;
     margin-top: 30px;
     line-height: 30px;
     letter-spacing: 1px;
 }
-.content .btn{
+.btn{
     margin-top: 20px;
     margin-right: 20px;
     width: 120px;
@@ -99,26 +94,17 @@ nav ul li:hover{
     letter-spacing: 1px;
 
 }
-.image-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  height: 200px;
-}
+
 .flex-container {
   display: flex;
   flex-direction: row;
 }
-.content .img {
+.img {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 400px;
-  height: 200px;
-
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .text {
   flex: 1;
@@ -129,14 +115,13 @@ footer {
   padding: 20px;
   text-align: center;
   display: block;
+  height: 50px;
 }
 footer p {
   margin: 0;
+  color: white;
 }
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+
 .social-icons {
   display: flex;
   justify-content: center;
