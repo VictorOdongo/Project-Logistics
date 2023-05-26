@@ -6,19 +6,19 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Personal(models.Model):
-    username = models.CharField(max_length=10, primary_key=True, unique=True)
+    username = models.CharField(max_length=10, unique=True, blank=False, default='xx234xx')
     lastname = models.CharField(max_length=10, blank=False)
     mobile = models.IntegerField(null=False, blank=False)
-    email = models.EmailField(max_length=20, blank=False, unique=True)
+    email = models.EmailField(max_length=20, blank=False, unique=True, primary_key=True)
     password = models.CharField(blank=False)
     
 class Entreprise(models.Model):
-    businessname = models.CharField(max_length=20, primary_key=True unique=True)
+    businessname = models.CharField(null=False, max_length=20, unique=True)
     businesssize = models.IntegerField(blank=False)
     firstname = models.CharField(max_length=10, blank=False)
     lastname = models.CharField(max_length=10, blank=False)
     mobile = models.IntegerField(null=False, blank=False)
-    email = models.EmailField(max_length=20, blank=False, unique=True)
+    email = models.EmailField(max_length=20, blank=False, unique=True, primary_key=True)
     password = models.CharField(blank=False)
     
 class Driver(models.Model):
