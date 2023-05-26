@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
+from user.models import Personal
 
 
 def home_view(request):
@@ -12,7 +13,42 @@ def getstarted_view(request):
     return render(request, 'user/getstarted.html')
 
 def personal_view(request):
-    return render(request, 'user/personal-signup.html')
+    if request.method == 'POST':
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        id = request.POST['id']
+        mobile = request.POST['mobile']
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        if User.objects.filter(email=email).exists():
+            messages.info(request, 'email already exists!')
+            return redirect('personal_view/')
+        elif User.objects.filter(id=id).exists():
+            messages.info(request, 'id number already exists!')
+            return redirect('personal_view/')
+        else:
+            user = User.objects.create_user(
+            first_name=firstname,
+            last_name=lastname,
+            id=id,
+            mobile=mobile,
+            email=email,
+            password=password
+        )
+            user.save()
+            
+            user_model = User.objects.get
+            new_profile = Personal.objects.create(user=user_model, id_user=user_model.id)
+            new_profile.save()
+            return redirect('sender-login/')
+    
+    
+    else: 
+        
+        return render(request, 'user/personal-signup.html')
+    
+    
 
 def business_view(request):
     return render(request, 'user/entreprise-signup.html')
@@ -32,42 +68,6 @@ def sendgig_view(request):
 def drivegig_view(request):
     return render(request, 'user/drivegig.html')
 
-
-
-def register(request):
-    if request.method == 'POST':
-        # Retrieve form data
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
-        id = request.POST['id']
-        mobile = request.POST['mobile']
-        email = request.POST['email']
-        password = request.POST['password']
-        
-        # Create User object
-        user = User.objects.create_user(
-            username=email,
-            password=password,
-            first_name=firstname,
-            last_name=lastname,
-            email=email,
-            mobile=mobile
-        )
-        
-        user.save()
-        print('Registration successful')
-        
-        # Redirect to a success page or login page
-        return redirect('sendgig') 
-        # Replace 'success' with your desired URL or view name
-        
-              
-    return render(request, 'user/personal-signup.html')
-        
-        
-        
-        
-        
         
         
 def user_login(request):

@@ -32,7 +32,8 @@ class Driver(models.Model):
     email = models.EmailField(max_length=20, blank=False, unique=True)
     password = models.CharField(blank=False)
                 
-    
+    def _str_(self):
+        return self.user.username
     
 # class CustomUser(AbstractUser):
     
