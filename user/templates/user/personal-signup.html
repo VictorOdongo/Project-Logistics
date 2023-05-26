@@ -1,3 +1,6 @@
+{% block content %} 
+
+{% load crispy_forms_tags %}     
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,6 +37,7 @@
       <h3>Create an account and get your stuff where it needs to go.</h3>
       <form action="#" method="POST">
         {% csrf_token %}
+        {{ register_form|crispy }} 
         <input type="text" name="firstname" placeholder="First Name" />
         <input type="text" name="lastname" placeholder="Last Name" />
         <input type="text" name="id" placeholder="ID" />
@@ -55,3 +59,4 @@
     </div>
   </body>
 </html>
+{% endblock %}

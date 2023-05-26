@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
-from user import Personal
 
 
 def home_view(request):
