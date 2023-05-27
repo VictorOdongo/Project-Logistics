@@ -47,8 +47,7 @@ def personal_view(request):
         
         return render(request, 'user/personal-signup.html')
     
-    
-
+           
 def business_view(request):
     return render(request, 'user/entreprise-signup.html')
 
