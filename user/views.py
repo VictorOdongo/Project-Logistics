@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
-from django.contrib.auth.models import User
-from django.contrib import messages, auth
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 from user.models import Personal
 
 
@@ -22,12 +22,15 @@ def personal_view(request):
         
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
-            return redirect('personal_view/')
+            return redirect('personal-signup')
+        elif User.objects.filter(username=username).exists():
+            messages.info(request, 'username taken!')
+            return redirect('personal-signup')
         
         else:
             user = User.objects.create_user(
             username=username,
-            last_name=lastname,
+            lastname=lastname,
             mobile=mobile,
             email=email,
             password=password

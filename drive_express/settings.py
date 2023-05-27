@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'drive_express.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'project_logistics',
+        'NAME':  'projectlogistics',
         'USER': 'postgres',
         'PASSWORD': 'victor100',
         'HOST': 'localhost',
