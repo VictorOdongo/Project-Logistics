@@ -27,8 +27,8 @@ body {
     width: 330px;
     height:700px;
     padding: 2rem 1rem;
-    margin: 0 auto;
-    margin-top: 8px;
+    margin-top: 10px;
+    margin-bottom: 30px;
     background-color: #fff;
     border-radius: 10px; 
     text-align: center;
@@ -37,7 +37,7 @@ body {
 .wrapper2 {
     width: 330px;
     height: 450px;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
     margin: 50px auto;
     background-color: #fff;
     border-radius: 10px; 
