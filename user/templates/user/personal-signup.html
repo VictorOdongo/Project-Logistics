@@ -21,12 +21,13 @@
     <div class="header">
       <h2>Individual Sign Up</h2>
     </div>
-    <div>
+    
+    <div class="wrapper">
+      <div>
       {% for message in messages %}
       <h5 style="color:coral">{{message}}</h5>
       {% endfor %}
     </div>
-    <div class="wrapper">
       <h3>Create an account and get your stuff where it needs to go.</h3>
       <form action="" method="POST">
         {% csrf_token %}
