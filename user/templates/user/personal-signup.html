@@ -1,4 +1,4 @@
-{% block content %}  
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,21 +21,26 @@
     <div class="header">
       <h2>Individual Sign Up</h2>
     </div>
-    
+
     <div class="wrapper">
       <div>
-      {% for message in messages %}
-      <h5 style="color:coral">{{message}}</h5>
-      {% endfor %}
-    </div>
+        {% for message in messages %}
+        <h5 style="color: coral">{{message}}</h5>
+        {% endfor %}
+      </div>
       <h3>Create an account and get your stuff where it needs to go.</h3>
       <form action="" method="POST">
         {% csrf_token %}
         <input type="text" name="username" placeholder="User Name" />
+        <input type="text" name="firstname" placeholder="First Name" />
         <input type="text" name="lastname" placeholder="Last Name" />
-        <input type="tel" name="mobile" placeholder="Mobile Number" />
         <input type="email" name="email" placeholder="Email Address" />
         <input type="password" name="password" placeholder="Password" />
+        <input
+          type="password"
+          name="password2"
+          placeholder="confirm Password"
+        />
         <button type="submit">Sign Up</button>
       </form>
       <div class="terms">
@@ -44,7 +49,7 @@
           DriveX's <a href="#">Privacy and Terms.</a></label
         >
       </div>
-      
+
       <div class="member">
         Have an account? <a href="sender-login.html">Login Here</a>
       </div>
