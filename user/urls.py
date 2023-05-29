@@ -12,5 +12,6 @@ urlpatterns = [
     path('drive', views.drive_view, name='driver-login'), 
     path('send', views.send_view, name='sender-login'),    
     path('sendgig', views.sendgig_view, name='send'), 
-    path('drivegig', views.drivegig_view, name='drive'), 
+    path('drivegig', views.drivegig_view, name='drive'),
+    path('logout', views.logout, name='logout'), 
 ]
