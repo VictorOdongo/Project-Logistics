@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from user.models import Personal
+from .models import User
 
 
 def home_view(request):
@@ -47,6 +48,29 @@ def personal_view(request):
         
         return render(request, 'user/personal-signup.html')
     
+    
+def send_view(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        user = auth.authenticate(email=email, password=password)
+        
+        if user is not None:
+            auth.send_view(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'invalid login details')
+            return redirect('sender-login')
+        
+    return render(request, 'user/sender-login.html')
+
+def logout(request):
+    auth.logout(request)
+    return render('/')
+
+
+    
            
 def business_view(request):
     return render(request, 'user/entreprise-signup.html')
@@ -57,8 +81,6 @@ def driver_view(request):
 def drive_view(request):
     return render(request, 'user/driver-login.html')
 
-def send_view(request):
-    return render(request, 'user/sender-login.html')
 
 def sendgig_view(request):
     return render(request, 'user/sendgig.html')

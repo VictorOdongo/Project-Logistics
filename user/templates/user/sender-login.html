@@ -18,14 +18,20 @@
     />
   </head>
   <body>
+    
     <div class="wrapper2">
       <h2>Sender Sign In</h2>
-      <form actio="#">
+      <div>
+      {% for message in messages %}
+      <h5 style="color:coral">{{message}}</h5>
+      {% endfor %}
+    </div>
+      <form action="">
         {% csrf_token %}
         <input type="text" placeholder="Email Address" />
         <input type="password" placeholder="Password" />
       </form>
-      <button>Sign In</button>
+      <button type="submit">Sign In</button>
       <div class="member">
         Not a member? <a href="registration.html">Register Now</a>
       </div>
