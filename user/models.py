@@ -9,8 +9,8 @@ class Personal(models.Model):
     username = models.CharField(max_length=10, unique=True, blank=False, default='xx234xx')
     lastname = models.CharField(max_length=10, blank=False)
     mobile = models.IntegerField(null=False, blank=False)
-    email = models.EmailField(max_length=20, blank=False, unique=True, primary_key=True)
-    password = models.CharField(blank=False)
+    email = models.EmailField(max_length=50, blank=False, unique=True, primary_key=True)
+    password = models.CharField(max_length=255, blank=False)
     
 class Entreprise(models.Model):
     businessname = models.CharField(null=False, max_length=20, unique=True)
@@ -18,18 +18,18 @@ class Entreprise(models.Model):
     firstname = models.CharField(max_length=10, blank=False)
     lastname = models.CharField(max_length=10, blank=False)
     mobile = models.IntegerField(null=False, blank=False)
-    email = models.EmailField(max_length=20, blank=False, unique=True, primary_key=True)
-    password = models.CharField(blank=False)
+    email = models.EmailField(max_length=50, blank=False, unique=True, primary_key=True)
+    password = models.CharField(max_length=255, blank=False)
     
 class Driver(models.Model):
     firstname = models.CharField(max_length=10, blank=False)
     lastname = models.CharField(max_length=10, blank=False)
     licence = models.CharField(max_length=10, blank=False, primary_key=True, unique=True)
     mobile = models.IntegerField(null=False, blank=False)
-    email = models.EmailField(max_length=20, blank=False, unique=True)
-    password = models.CharField(blank=False)
+    email = models.EmailField(max_length=50, blank=False, unique=True)
+    password = models.CharField(max_length=255, blank=False)
                 
-    def _str_(self):
+    def __str__(self):
         return self.user.username
     
 # class CustomUser(AbstractUser):

@@ -23,10 +23,10 @@ def personal_view(request):
         
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
-            return redirect('personal-signup')
+            return redirect('personal_view')
         elif User.objects.filter(username=username).exists():
             messages.info(request, 'username taken!')
-            return redirect('personal-signup')
+            return redirect('personal_view')
         
         else:
             user = User.objects.create_user(
