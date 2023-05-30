@@ -1,11 +1,12 @@
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 class Personal(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.CharField(max_length=10, unique=True, blank=False, default='xx234xx')
     firstname = models.CharField(max_length=10, blank=True)
     lastname = models.CharField(max_length=10, blank=False)
@@ -33,6 +34,6 @@ class Driver(models.Model):
     def __str__(self):
         return self.user.username
     
-# class CustomUser(AbstractUser):
+#class Personal(AbstractUser):
     
     # pass
