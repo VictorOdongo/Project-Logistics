@@ -10,8 +10,8 @@ urlpatterns = [
     path('entreprise', views.business_view, name='entreprise-signup'), 
     path('driver', views.driver_view, name='driver-signup'), 
     path('drive', views.drive_view, name='driver-login'), 
-    path('send', views.send_view, name='sender-login'),    
-    path('sendgig', views.sendgig_view, name='send'), 
-    path('drivegig', views.drivegig_view, name='drive'),
+    path('sender', views.sender_view, name='sender-login'),    
+    path('sendgig', views.sendgig_view, name='sendgig'), 
+    path('drivegig', views.drivegig_view, name='drivegig'),
     path('logout', views.logout, name='logout'), 
 ]

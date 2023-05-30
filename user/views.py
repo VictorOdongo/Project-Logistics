@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from user.models import Personal, Entreprise, Driver
 from .models import User
+from .models import Entreprise
 
 
 def home_view(request):
@@ -47,20 +48,8 @@ def personal_view(request):
         return render(request, 'user/personal-signup.html')
     
     
-def send_view(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        
-        user = auth.authenticate(email=email, password=password)
-        
-        if user is not None:
-            auth.send_view(request, user)
-            return redirect('/')
-        else:
-            messages.info(request, 'invalid login details')
-            return redirect('sender-login')
-        
+def sender_view(request):
+    
     return render(request, 'user/sender-login.html')
 
 def logout(request):
@@ -78,15 +67,13 @@ def business_view(request):
         mobile = request.POST['mobile']
         email = request.POST['email']
         password = request.POST['password']
-
-
         
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
-            return redirect('personal-signup')
+            return redirect('entreprise-signup')
         elif User.objects.filter(username=bizname).exists():
             messages.info(request, 'business name taken!')
-            return redirect('personal-signup')
+            return redirect('entreprise-signup')
         
         else:
             user = User.objects.create_user(
@@ -100,7 +87,7 @@ def business_view(request):
             user.save()
             
             user_model = User.objects.get(username=bizname)
-            new_profile = Personal.objects.create(user=user_model)
+            new_profile = Entreprise.objects.create(user=user_model)
             new_profile.save()
             return redirect('sender-login')
         
