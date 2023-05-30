@@ -36,11 +36,6 @@
         <input type="text" name="lastname" placeholder="Last Name" />
         <input type="email" name="email" placeholder="Email Address" />
         <input type="password" name="password" placeholder="Password" />
-        <input
-          type="password"
-          name="password2"
-          placeholder="confirm Password"
-        />
         <button type="submit">Sign Up</button>
       </form>
       <div class="terms">
@@ -51,7 +46,7 @@
       </div>
 
       <div class="member">
-        Have an account? <a href="sender-login.html">Login Here</a>
+        Have an account? <a href="{% url 'user:sender-login' %}">Login Here</a>
       </div>
     </div>
   </body>
