@@ -16,8 +16,8 @@ def getstarted_view(request):
 def personal_view(request):
     if request.method == 'POST':
         username = request.POST['username']
+        firstname = request.POST['firstname']
         lastname = request.POST['lastname']
-        mobile = request.POST['mobile']
         email = request.POST['email']
         password = request.POST['password']
         
@@ -31,8 +31,8 @@ def personal_view(request):
         else:
             user = User.objects.create_user(
             username=username,
-            lastname=lastname,
-            mobile=mobile,
+            firstname=firstname,
+            lastname=lastname, 
             email=email,
             password=password
         )

@@ -11,7 +11,7 @@ class Personal(models.Model):
     lastname = models.CharField(max_length=10, blank=False)
     email = models.EmailField(max_length=50, blank=False, unique=True, primary_key=True)
     password = models.CharField(max_length=255, blank=False)
-    password2 = models.CharField(max_length=255, blank=False)
+   
     
 class Entreprise(models.Model):
     businessname = models.CharField(null=False, max_length=20, unique=True)
