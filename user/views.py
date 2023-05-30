@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from user.models import Personal
+from user.models import Personal, Entreprise, Driver
 from .models import User
 
 
@@ -42,10 +42,8 @@ def personal_view(request):
             new_profile = Personal.objects.create(user=user_model)
             new_profile.save()
             return redirect('sender-login')
-    
-    
-    else: 
         
+    else:     
         return render(request, 'user/personal-signup.html')
     
     
@@ -73,7 +71,43 @@ def logout(request):
     
            
 def business_view(request):
-    return render(request, 'user/entreprise-signup.html')
+    if request.method == 'POST':
+        bizname = request.POST['bizname']
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        mobile = request.POST['mobile']
+        email = request.POST['email']
+        password = request.POST['password']
+
+
+        
+        if User.objects.filter(email=email).exists():
+            messages.info(request, 'email already exists!')
+            return redirect('personal-signup')
+        elif User.objects.filter(username=bizname).exists():
+            messages.info(request, 'business name taken!')
+            return redirect('personal-signup')
+        
+        else:
+            user = User.objects.create_user(
+            username=bizname,
+            email=email,
+            password=password
+        )
+            user.first_name = firstname
+            user.last_name = lastname
+            user.mobile = mobile
+            user.save()
+            
+            user_model = User.objects.get(username=bizname)
+            new_profile = Personal.objects.create(user=user_model)
+            new_profile.save()
+            return redirect('sender-login')
+        
+    else:
+         return render(request, 'user/entreprise-signup.html')
+
+
 
 def driver_view(request):
     return render(request, 'user/driver-signup.html')
@@ -90,13 +124,3 @@ def drivegig_view(request):
 
         
         
-def user_login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')  # Redirect to your desired page
-    else:
-        form = AuthenticationForm()
-    return render(request, 'registration/login.html', {'form': form})
