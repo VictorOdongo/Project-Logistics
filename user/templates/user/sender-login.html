@@ -28,12 +28,12 @@
     </div>
       <form action="">
         {% csrf_token %}
-        <input type="text" placeholder="Email Address" />
-        <input type="password" placeholder="Password" />
+        <input type="text" name="email"  placeholder="Email Address" />
+        <input type="password" name="password" placeholder="Password" />
       </form>
       <button type="submit">Sign In</button>
       <div class="member">
-        Not a member? <a href="registration.html">Register Now</a>
+        Not a member? <a href="{% url 'user:personal-signup' %}">Register Now</a>
       </div>
     </div>
   </body>

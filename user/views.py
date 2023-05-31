@@ -3,9 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from user.models import Personal, Entreprise, Driver
-from .models import User
-from .models import Entreprise
+from .models import Personal, Entreprise, Driver
 
 
 def home_view(request):
@@ -14,7 +12,7 @@ def home_view(request):
 def getstarted_view(request):
     return render(request, 'user/getstarted.html')
 
-def personal_view(request):
+def personal_signup(request):
     if request.method == 'POST':
         u_name = request.POST['username']
         firstname = request.POST['firstname']
@@ -39,16 +37,36 @@ def personal_view(request):
             user.last_name = lastname
             user.save()
             
-            user_model = User.objects.get(username=u_name)
-            new_profile = Personal.objects.create(user=user_model)
-            new_profile.save()
-            return redirect('sender-login')
+        personal = Personal.objects.create(
+                user=user,
+                username=u_name,
+                firstname=firstname,
+                lastname=lastname,
+                email=email,
+                password=password
+            )
+        personal.save()
+            
+            # user_model = User.objects.get(username=u_name)
+            # new_profile = Personal.objects.create(user=user_model)
+            # new_profile.save()
+        return redirect('sender_login')
         
     else:     
         return render(request, 'user/personal-signup.html')
     
     
-def sender_view(request):
+def sender_login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('sendgig')  # Replace 'desired-page' with the URL name of your desired page
+        else:
+            messages.error(request, 'Invalid credentials!')
     
     return render(request, 'user/sender-login.html')
 
@@ -59,7 +77,7 @@ def logout(request):
 
     
            
-def business_view(request):
+def entreprise_signup(request):
     if request.method == 'POST':
         bizname = request.POST['bizname']
         firstname = request.POST['firstname']
@@ -96,12 +114,11 @@ def business_view(request):
 
 
 
-def driver_view(request):
+def driver_signup(request):
     return render(request, 'user/driver-signup.html')
 
-def drive_view(request):
+def drive_login(request):
     return render(request, 'user/driver-login.html')
-
 
 def sendgig_view(request):
     return render(request, 'user/sendgig.html')
