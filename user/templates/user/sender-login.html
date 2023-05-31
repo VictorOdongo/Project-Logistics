@@ -26,12 +26,12 @@
       <h5 style="color:coral">{{message}}</h5>
       {% endfor %}
     </div>
-      <form action="">
+      <form action="{% url 'user:sender-login' %}" method="POST">
         {% csrf_token %}
         <input type="text" name="email"  placeholder="Email Address" />
         <input type="password" name="password" placeholder="Password" />
+        <button type="submit">Sign In</button>
       </form>
-      <button type="submit">Sign In</button>
       <div class="member">
         Not a member? <a href="{% url 'user:personal-signup' %}">Register Now</a>
       </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .models import Personal, Entreprise, Driver
@@ -22,7 +22,7 @@ def personal_signup(request):
         
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
-            return redirect('personal-signup')
+            return redirect('/personal-signup')
         elif User.objects.filter(username=u_name).exists():
             messages.info(request, 'username taken!')
             return redirect('personal-signup')
@@ -50,8 +50,8 @@ def personal_signup(request):
             # user_model = User.objects.get(username=u_name)
             # new_profile = Personal.objects.create(user=user_model)
             # new_profile.save()
-        return redirect('sender_login')
-        
+        return redirect('/sender-login')
+            
     else:     
         return render(request, 'user/personal-signup.html')
     
@@ -64,15 +64,16 @@ def sender_login(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('sendgig')  # Replace 'desired-page' with the URL name of your desired page
+            return redirect('sendgig')
         else:
             messages.error(request, 'Invalid credentials!')
+            return redirect('user:sender-login')
     
     return render(request, 'user/sender-login.html')
 
 def logout(request):
-    auth.logout(request)
-    return render('/')
+    auth_logout(request)
+    return redirect('/')
 
 
     

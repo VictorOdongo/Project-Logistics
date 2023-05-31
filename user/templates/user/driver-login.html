@@ -1,4 +1,4 @@
- {% block content %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,13 +19,14 @@
   </head>
   <body>
     <div class="wrapper2">
-      <h2>Driver Sign In</h2><br>
-      <form action="#">
+      <h2>Driver Sign In</h2>
+      <br />
+      <form action="" method="POST">
         {% csrf_token %}
-        <input type="text" placeholder="Email Address" />
-        <input type="password" placeholder="Password" />
+        <input type="text" name="email" placeholder="Email Address" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">Sign In</button>
       </form>
-      <button>Sign In</button>
       <div class="member">
         New to DriveX? <a href="{% url 'user:driver-signup' %}">Register Now</a>
       </div>
