@@ -125,6 +125,11 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR,  'static')
 
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', # This is the default that allows us to log in via username
+    'user.authentication.EmailAuthBackend'
+]
+
 LOGIN_URL = 'sender-login'
 
 STATICFILES_DIRS = [
