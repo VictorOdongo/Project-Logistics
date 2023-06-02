@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -47,10 +46,6 @@ def personal_signup(request):
             )
         user.set_password(password)
         personal.save()
-            
-            # user_model = User.objects.get(username=u_name)
-            # new_profile = Personal.objects.create(user=user_model)
-            # new_profile.save()
         return redirect('/sender-login')
             
     else:     
@@ -65,40 +60,12 @@ def sender_login(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('sendgig')
+            return redirect('/sendgig')
         else:
             messages.error(request, 'Invalid credentials!')
             return redirect('user:sender-login')
     
     return render(request, 'user/sender-login.html')
-
-# class EmalAuthBackend:
-#     """
-#     Custom authentication backend.
-
-#     Allows users to log in using their email address.
-#     """
-
-#     def authenticate(self, request, username=None, password=None):
-#         """
-#         Overrides the authenticate method to allow users to log in using their email address.
-#         """
-#         try:
-#             user = User.objects.get(email=username)
-#             if user.check_password(password):
-#                 return user
-#             return None
-#         except User.DoesNotExist:
-#             return None
-
-#     def get_user(self, user_id):
-#         """
-#         Overrides the get_user method to allow users to log in using their email address.
-#         """
-#         try:
-#             return User.objects.get(pk=user_id)
-#         except User.DoesNotExist:
-#             return None
 
 def logout(request):
     auth_logout(request)
