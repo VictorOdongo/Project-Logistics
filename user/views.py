@@ -45,6 +45,7 @@ def personal_signup(request):
                 email=email,
                 password=password
             )
+        user.set_password(password)
         personal.save()
             
             # user_model = User.objects.get(username=u_name)
@@ -61,7 +62,7 @@ def sender_login(request):
         email = request.POST['email']
         password = request.POST['password']
         
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
             return redirect('sendgig')
