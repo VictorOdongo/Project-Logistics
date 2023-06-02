@@ -11,6 +11,8 @@ def home_view(request):
 def getstarted_view(request):
     return render(request, 'user/getstarted.html')
 
+# Personal views
+# Handle personal signup form submission
 def personal_signup(request):
     if request.method == 'POST':
         u_name = request.POST['username']
@@ -51,7 +53,8 @@ def personal_signup(request):
     else:     
         return render(request, 'user/personal-signup.html')
     
-    
+# Handle personal login form submission
+# Perform authentication and login logic for personal user
 def sender_login(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -67,13 +70,14 @@ def sender_login(request):
     
     return render(request, 'user/sender-login.html')
 
+# Logout user
 def logout(request):
     auth_logout(request)
     return redirect('/')
 
 
-    
-           
+ # Enterprise views
+ # Handle enterprise signup form submission          
 def entreprise_signup(request):
     if request.method == 'POST':
         bizname = request.POST['bizname']
@@ -85,10 +89,10 @@ def entreprise_signup(request):
         
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
-            return redirect('entreprise-signup')
+            return redirect('/entreprise-signup')
         elif User.objects.filter(username=bizname).exists():
             messages.info(request, 'business name taken!')
-            return redirect('entreprise-signup')
+            return redirect('/entreprise-signup')
         
         else:
             user = User.objects.create_user(
@@ -101,19 +105,30 @@ def entreprise_signup(request):
             user.mobile = mobile
             user.save()
             
-            user_model = User.objects.get(username=bizname)
-            new_profile = Entreprise.objects.create(user=user_model)
-            new_profile.save()
-            return redirect('sender-login')
+        personal = Entreprise.objects.create(
+                user=user,
+                business_name=bizname,
+                firstname=firstname,
+                lastname=lastname,
+                mobile=mobile,
+                email=email,
+                password=password
+            )
+        user.set_password(password)
+        personal.save()
+        return redirect('/sender-login')
         
     else:
          return render(request, 'user/entreprise-signup.html')
 
 
-
+# Driver views
+# Handle driver signup form submission
 def driver_signup(request):
     return render(request, 'user/driver-signup.html')
 
+# Handle driver login form submission
+# Perform authentication and login logic for driver user
 def drive_login(request):
     return render(request, 'user/driver-login.html')
 

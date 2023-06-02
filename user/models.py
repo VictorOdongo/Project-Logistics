@@ -14,7 +14,8 @@ class Personal(models.Model):
     password = models.CharField(max_length=255, blank=False)
    
 class Entreprise(models.Model):
-    businessname = models.CharField(null=False, max_length=20, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    business_name = models.CharField(null=False, max_length=20, unique=True)
     firstname = models.CharField(max_length=10, blank=False)
     lastname = models.CharField(max_length=10, blank=False)
     mobile = models.IntegerField(null=False, blank=False)
@@ -22,7 +23,7 @@ class Entreprise(models.Model):
     password = models.CharField(max_length=255, blank=False)
     
 class Driver(models.Model):
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=10, blank=False)
     lastname = models.CharField(max_length=10, blank=False)
     licence = models.CharField(max_length=10, blank=False, primary_key=True, unique=True)
