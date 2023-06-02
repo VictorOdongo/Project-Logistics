@@ -1,3 +1,4 @@
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,16 +22,22 @@
       <h2>Driver Sign Up</h2>
     </div>
     <div class="wrapper">
+      <div>
+        {% for message in messages %}
+        <h5 style="color: coral">{{message}}</h5>
+        {% endfor %}
+      </div>
       <h3>
         Get Paid to Drive, your way.<br> Earn cash on trips you're already taking.
       </h3>
       <form action="" method="POST">
-        <input type="text" placeholder="First Name" />
-        <input type="text" placeholder="Last Name" />
-        <input type="text" placeholder="Licence Number" />
-        <input type="tel" placeholder="Phone Number" />
-        <input type="email" placeholder="Email Address" />
-        <input type="password" placeholder="Password" />
+        {% csrf_token %}
+        <input type="text" name="firstname" placeholder="First Name" />
+        <input type="text" name="lastname" placeholder="Last Name" />
+        <input type="text" name="license" placeholder="Licence Number" />
+        <input type="tel" name="mobile" placeholder="Phone Number" />
+        <input type="email" name="email" placeholder="Email Address" />
+        <input type="password" name="password" placeholder="Password" />
         <button type="submit">Continue</button>
       </form>
       <div class="terms">
@@ -46,3 +53,4 @@
     </div>
   </body>
 </html>
+{% endblock %}

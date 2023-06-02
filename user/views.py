@@ -125,11 +125,63 @@ def entreprise_signup(request):
 # Driver views
 # Handle driver signup form submission
 def driver_signup(request):
-    return render(request, 'user/driver-signup.html')
+    if request.method == 'POST':
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        license = request.POST['license']
+        mobile = request.POST['mobile']
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        if User.objects.filter(email=email).exists():
+            messages.info(request, 'email already exists!')
+            return redirect('/driver-signup')
+        elif User.objects.filter(username=license).exists():
+            messages.info(request, 'driver license already exists!')
+            return redirect('/driver-signup')
+        
+        else:
+            user = User.objects.create_user(
+            username=license,
+            email=email,
+            password=password
+        )
+            user.first_name = firstname
+            user.last_name = lastname
+            user.mobile = mobile
+            user.save()
+            
+        personal = Driver.objects.create(
+                user=user,
+                firstname=firstname,
+                lastname=lastname,
+                license=license,
+                mobile=mobile,
+                email=email,
+                password=password
+            )
+        user.set_password(password)
+        personal.save()
+        return redirect('/driver-login')
+            
+    else:
+        return render(request, 'user/driver-signup.html')
 
 # Handle driver login form submission
 # Perform authentication and login logic for driver user
 def drive_login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/drivegig')
+        else:
+            messages.error(request, 'Invalid credentials!')
+            return redirect('user:driver-login')
+    
     return render(request, 'user/driver-login.html')
 
 def sendgig_view(request):
