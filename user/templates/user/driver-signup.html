@@ -8,6 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Driver Sign Up</title>
     <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link
       href="{% static '/user/user.css'%}"
       rel="stylesheet"
       type="text/css"
@@ -18,9 +24,22 @@
     />
   </head>
   <body>
-    <div class="header">
-      <h2>Driver Sign Up</h2>
-    </div>
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-dark"
+      style="background-color: #333"
+    >
+      <div class="container-fluid">
+        <h1>DriveXpress</h1>
+      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Driver</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">SignUp!</a>
+        </li>
+      </ul>
+    </nav>
     <div class="wrapper">
       <div>
         {% for message in messages %}
@@ -28,7 +47,7 @@
         {% endfor %}
       </div>
       <h3>
-        Get Paid to Drive, your way.<br> Earn cash on trips you're already taking.
+        Driver Sign Up
       </h3>
       <form action="" method="POST">
         {% csrf_token %}
@@ -51,6 +70,7 @@
         Have an account? <a href="{% url 'user:driver-login' %}">Login Here</a>
       </div>
     </div>
+    <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
   </body>
 </html>
 {% endblock %}
