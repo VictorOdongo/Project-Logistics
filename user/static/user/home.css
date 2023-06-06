@@ -79,7 +79,8 @@ nav ul li a:hover{
     background: #058283;
     color: #fff;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
+    text-decoration: none;
 }
 
 .btn:hover{
