@@ -2,16 +2,44 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DriveX Deliver item</title>
-</head>
-<body>
-    <h1>Welcome {{user.firstname}}! Get paid to drive, earn money on the way.</h1>
-
-    <h3><a href="logout">logout</a></h3>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery gig</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static '/user/getstarted.css' %}"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-dark"
+      style="background-color: #333"
+    >
+      <div class="container-fluid">
+        <h1>DriveXpress</h1>
+      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Welcome</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">{{user.username}}!</a>
+        </li>  
+      <a href="logout"
+        ><button class="btn btn-info btn-lg" type="submit" style="width: 100px; height: 45px">Logout</button></a
+      >
+    </nav>
+    <h2>Get paid to drive, anytime, anywhere! Make money while on the go!</h2>
+    <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
+  </body>
 </html>
 {% endblock %}
