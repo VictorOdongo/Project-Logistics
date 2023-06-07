@@ -42,8 +42,12 @@
     </nav>
     <div class="wrapper2">
       <h2>Driver Sign In</h2>
-      <br />
-      <form action="" method="POST">
+      <div>
+        {% for message in messages %}
+        <h5 style="color: coral">{{message}}</h5>
+        {% endfor %}
+      </div>
+      <form action="{% url 'user:driver-login' %}" method="POST">
         {% csrf_token %}
         <input type="text" name="email" placeholder="Email Address" />
         <input type="password" name="password" placeholder="Password" />

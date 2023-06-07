@@ -46,7 +46,7 @@
       {% for message in messages %}
       <h5 style="color:coral">{{message}}</h5>
       {% endfor %}
-    </div>
+      </div>
       <form action="{% url 'user:sender-login' %}" method="POST">
         {% csrf_token %}
         <input type="text" name="email"  placeholder="Email Address" />
