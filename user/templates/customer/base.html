@@ -1,12 +1,62 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer</title>
+  </head>
+  <body>
+    {% block content %}
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-dark"
+      style="background-color: #333"
+    >
+      <div class="container-fluid">
+        <h1>DriveXpress</h1>
+      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Driver</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Login!</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container bg-light mt-4 pt-3 pb-3">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="text-center">
+            <img
+              src="{% static 'img/avatar.png' %}"
+              alt=""
+              class="rounded-circle mb-2"
+              width="100"
+              height="100"
+            />
+            <h4>{{ request.user.get_full_name }}</h4>
+            <p class="text-secondary">{{ request.user.email }}</p>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">A fourth item</li>
+            <li class="list-group-item">And a fifth one</li>
+          </ul>
+        </div>
+        <div class="col-lg-8">
+            {% block main %}
+
+            {% end block %}
+        </div>
+      </div>
+    </div>
+    <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
+    {% block main %} {% endblock %}
+  </body>
 </html>
