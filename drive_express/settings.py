@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
     'bootstrap4',
-    'deliveries.apps.DeliveriesConfig',
 ]
 
 MIDDLEWARE = [

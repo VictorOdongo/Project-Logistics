@@ -18,6 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from user import views
+
+from user.customer import views as customer_views
+from user.driver import views as driverer_views
+
+# customer_urlpatterns = [
+#     path('', customer_views.sendgig, name="sendgig")
+# ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -13,5 +13,6 @@ urlpatterns = [
     path('sender-login', views.sender_login, name='sender-login'),    
     path('sendgig', views.sendgig_view, name='sendgig'), 
     path('drivegig', views.drivegig_view, name='drivegig'),
-    path('logout', views.logout, name='logout'), 
+    path('logout', views.logout, name='logout'),
+    path('policy', views.policy, name='policy'),
 ]

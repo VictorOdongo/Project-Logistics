@@ -190,5 +190,8 @@ def sendgig_view(request):
 def drivegig_view(request):
     return render(request, 'user/drivegig.html')
 
+def policy(request):
+    return render(request, 'user/policy.html')
+
         
         

@@ -14,78 +14,67 @@
     />
   </head>
   <body>
-      <header>
-        <h1 class="logo">DriveXpress</h1>
-        <nav>
-          <div class="nav-links" id="navLinks">
-            <i class="fa fa-timmes" onclick="hideMenu()"></i>
-            <ul>
-              <li class="active">HOME</li>
-              <li>
-                <a href="{% url 'user:entreprise-signup' %}">ENTREPRISE</a>
-              </li>
-              <li><a href="{% url 'user:personal-signup' %}">PERSONAL</a></li>
-              <li><a href="{% url 'user:driver-signup' %}">DRIVERS</a></li>
-              <li>
-                <a href="{% url 'user:getstarted' %}"
-                  ><button class="btn">GET STARTED</button></a
-                >
-              </li>
-            </ul>
-          </div>
-          <i class="fa fa-timmes" onclick="showMenu()"></i>
-        </nav>
-      </header>
-      <div class="main">
-        <h3>DriveXpress Business Solutions</h3>
-        <h1>Local delivery for any<br />item, any size, anywhere</h1>
+    <header>
+      <h1 class="logo">DriveXpress</h1>
+      <nav>
+        <div class="nav-links" id="navLinks">
+          <i class="fa fa-timmes" onclick="hideMenu()"></i>
+          <ul>
+            <li class="active">HOME</li>
+            <li>
+              <a href="{% url 'user:entreprise-signup' %}">ENTREPRISE</a>
+            </li>
+            <li><a href="{% url 'user:personal-signup' %}">PERSONAL</a></li>
+            <li><a href="{% url 'user:driver-signup' %}">DRIVERS</a></li>
+            <li>
+              <a href="{% url 'user:getstarted' %}"
+                ><button class="btn">GET STARTED</button></a
+              >
+            </li>
+          </ul>
+        </div>
+        <i class="fa fa-timmes" onclick="showMenu()"></i>
+      </nav>
+    </header>
+    <div class="main">
+      <h3>DriveXpress Business Solutions</h3>
+      <h1>Local delivery for any<br />item, any size, anywhere</h1>
 
-        <div class="flex-container">
-          <div class="text">
-            <p>
-              Unlock flexible, high-quality delivery for any item, any size,
-              anywhere with the largest local<br />
-              by tapping DriveXpress' crowdsourced delivery platform.
-              Conveniently send and receive your<br />
-              ordered packages same-day delivery footprint in thie nation. Grow
-              revenue and build a more<br />
-              efficient logistics networks from your favourite vendor or
-              colleagues any time!
-            </p>
-          </div>
-          <!-- <div class="img">
+      <div class="flex-container">
+        <div class="text">
+          <p>
+            Unlock flexible, high-quality delivery for any item, any size,
+            anywhere with the largest local<br />
+            by tapping DriveXpress' crowdsourced delivery platform. Conveniently
+            send and receive your<br />
+            ordered packages same-day delivery footprint in thie nation. Grow
+            revenue and build a more<br />
+            efficient logistics networks from your favourite vendor or
+            colleagues any time!
+          </p>
+        </div>
+        <!-- <div class="img">
             <img
               src="{% static 'images/img/crowdsourced.jpg' %}"
               alt="delivery"
             />
           </div> -->
-        </div>
-        <a href="contact.html"><button class="btn">Contact</button></a>
-        <a href="policy.html"><button class="btn">Policy</button></a>
       </div>
-      <footer>
-        <p>Copyright &copy; 2023 Drive Express. All Rights Reserved.</p>
-
-        <div class="social-icons">
-          <a href="#">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-facebook"></i>
-          </a>
-        </div>
-      </footer>
-
-      <script>
-        // javascript for toggle menu
-
-        var navLinks = document.getElementById("navlinks");
-        function showMenu() {
-          navLinks.style.right = "0";
-        }
-        function hideMenu() {
-          navLinks.style.right = "-200px";
-        }
-      </script>
+      <a href="contact.html"><button class="btn">Contact</button></a>
+    </div>
+    <footer>
+      <p>
+        Copyright &copy; 2023 Drive Express.
+        <a href="{% url 'user:policy' %}" style="color: white;">Terms of Use & Privacy Policy</a>
+      </p>
+      <div class="social-icons">
+        <a href="#">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>
+    </footer>
   </body>
 </html>
