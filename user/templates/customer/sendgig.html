@@ -1,4 +1,4 @@
-{% load static %} {% block content %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,11 +11,6 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
       crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static '/user/getstarted.css' %}"
-      type="text/css"
     />
   </head>
   <body>
@@ -64,22 +59,12 @@
               <h4>{{ request.user.get_full_name }}</h4>
               <p class="text-secondary">{{ request.user.email }}</p>
             </div>
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td class="table text-white"><a href=""> Delivery Gig</a></td>
-                </tr>
-                <tr>
-                  <td>My Deliveries</td>
-                </tr>
-                <tr>
-                  <td>Profile Details</td>
-                </tr>
-                <tr>
-                  <td>Payment details</td>
-                </tr>
-              </tbody>
-            </table>
+            <ul class="list-group">
+              <li class="list-group-item">Post Delivery Gig</li>
+              <li class="list-group-item">My Deliveries</li>
+              <li class="list-group-item">Profile Details</li>
+              <li class="list-group-item">Payment Details</li>
+            </ul>
           </div>
           <div class="col-lg-8">{% block main %} {% endblock %}</div>
         </div>
@@ -100,4 +85,3 @@
     ></script>
   </body>
 </html>
-{% endblock %}
