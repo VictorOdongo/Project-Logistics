@@ -149,5 +149,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ['victorodongo397@gmail.com']
-EMAIL_HOST_PASSWORD = os.environ['']
-DEFAULT_FROM_EMAIL = 'Fast Parcel <no-reply@drive_express.localhost>'
+EMAIL_HOST_PASSWORD = os.environ['wfqmhcubuwiylgti']
+DEFAULT_FROM_EMAIL = 'drive_express <no-reply@drive_express.localhost>'
