@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.config import settings
+from django.conf import settings
 from django.core.mail import send_mail
 from .models import Personal, Entreprise, Driver
 
@@ -50,8 +50,8 @@ def personal_signup(request):
             )
         user.set_password(password)
         personal.save()
-        subject = 'welcome to GFG world'
-        message = f'Hi {user.username}, thank you for registering in geeksforgeeks.'
+        subject = 'welcome to DriveX delivery!'
+        message = f'Hi {user.username}, thank you for signing up for DriveX! Your all-time delivery service.'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [user.email, ]
         send_mail( subject, message, email_from, recipient_list )
@@ -123,6 +123,11 @@ def entreprise_signup(request):
             )
         user.set_password(password)
         personal.save()
+        subject = 'welcome to DriveX delivery!'
+        message = f'Hi {user.username}, thank you for signing up for DriveX! Your all-time delivery service.'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [user.email, ]
+        send_mail( subject, message, email_from, recipient_list )
         return redirect('/sender-login')
         
     else:
@@ -169,6 +174,11 @@ def driver_signup(request):
             )
         user.set_password(password)
         personal.save()
+        subject = 'welcome to DriveX delivery!'
+        message = f'Hi {user.username}, thank you for signing up for DriveX! Your all-time delivery service.'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [user.email, ]
+        send_mail( subject, message, email_from, recipient_list )
         return redirect('/driver-login')
             
     else:
