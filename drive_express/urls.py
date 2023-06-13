@@ -24,7 +24,8 @@ from user.customer import views as customer_views
 from user.driver import views as driver_views
 
 customer_urlpatterns = [
-    # path('sendgig', views.sendgig_view, name='sendgig'), 
+    # path('', customer_views.sendgig_view, name='sendgig'), 
+    path('', customer_views.home, name='home'),
     path('profile/', customer_views.profile_page, name="profile"),
 ]
 

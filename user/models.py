@@ -7,6 +7,7 @@ User = get_user_model()
 
 class Personal(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='customer/avatars/', blank=True, null=True)
     username = models.CharField(max_length=15, unique=True, blank=False, default='xx234xx')
     firstname = models.CharField(max_length=20, blank=True)
     lastname = models.CharField(max_length=20, blank=False)

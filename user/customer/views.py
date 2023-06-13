@@ -4,10 +4,10 @@ from django.urls import reverse
 from user.customer import forms
 
 @login_required()
-def sendgig_view(request):
+def home(request):
     return redirect(reverse('customer:profile'))
 
-@login_required(login_url="sender-login?next=/customer/")
+@login_required(login_url="/sender-login?next=/customer/")
 def profile_page(request):
     user_form = forms.BasicUserForm(instance=request.user)
     
