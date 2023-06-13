@@ -21,10 +21,15 @@ from django.conf.urls.static import static
 from user import views
 
 from user.customer import views as customer_views
-from user.driver import views as driverer_views
+from user.driver import views as driver_views
 
-# customer_urlpatterns = [
-#     path('', customer_views.sendgig, name="sendgig")
+customer_urlpatterns = [
+    # path('sendgig', views.sendgig_view, name='sendgig'), 
+    path('profile/', customer_views.profile_page, name="profile"),
+]
+
+# driver_urlpatterns = [
+#     path('', driver_views.sendgig, name="drivegig"),
 # ]
 
 urlpatterns = [
