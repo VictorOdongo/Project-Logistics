@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.core.mail import send_mail
 from .models import Personal, Entreprise, Driver
 
@@ -51,8 +52,8 @@ def personal_signup(request):
             )
         user.set_password(password)
         personal.save()
-        subject = 'welcome to DriveX delivery!'
-        message = f'Hi {user.username}, thank you for signing up for DriveX! Your all-time delivery service.'
+        subject = 'welcome to DriveX!'
+        message = f'Hello {user.username}, thank you for signing up fo DriveX delivery service.'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [user.email, ]
         send_mail( subject, message, email_from, recipient_list )
@@ -60,6 +61,16 @@ def personal_signup(request):
             
     else:     
         return render(request, 'user/personal-signup.html')
+    
+#Send welcome email to new user
+# def send_welcome_email(user_email, user_name):
+#     subject = 'Welcome to DriveX'
+#     html_message = render_to_string('user/welcome_email.html', {'user_name': user_name})
+#     plain_message = strip_tags(html_message)
+#     from_email = settings.EMAIL_HOST_USER
+#     to_email = user_email
+
+#     send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
     
 # Handle personal login form submission
 # Perform authentication and login logic for personal user
@@ -124,8 +135,8 @@ def entreprise_signup(request):
             )
         user.set_password(password)
         personal.save()
-        subject = 'welcome to DriveX delivery!'
-        message = f'Hi {user.username}, thank you for signing up for DriveX! Your all-time delivery service.'
+        subject = 'welcome to DriveX!'
+        message = f'Hello {user.username}, thank you for signing up fo DriveX delivery service.'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [user.email, ]
         send_mail( subject, message, email_from, recipient_list )
@@ -175,8 +186,8 @@ def driver_signup(request):
             )
         user.set_password(password)
         personal.save()
-        subject = 'welcome to DriveX delivery!'
-        message = f'Hi {user.username}, thank you for signing up for DriveX! Your all-time delivery service.'
+        subject = 'welcome to DriveX!'
+        message = f'Hello {user.username}, thank you for signing up fo DriveX delivery service.'
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [user.email, ]
         send_mail( subject, message, email_from, recipient_list )

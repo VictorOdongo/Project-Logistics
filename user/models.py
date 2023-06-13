@@ -22,7 +22,7 @@ class Entreprise(models.Model):
     business_name = models.CharField(null=False, max_length=20, unique=True)
     firstname = models.CharField(max_length=20, blank=False)
     lastname = models.CharField(max_length=20, blank=False)
-    mobile = models.IntegerField(null=False, blank=False)
+    mobile = models.CharField(max_length=20, null=False, blank=False)
     email = models.EmailField(max_length=50, blank=False, unique=True, primary_key=True)
     password = models.CharField(max_length=255, blank=False)
     
@@ -34,7 +34,7 @@ class Driver(models.Model):
     firstname = models.CharField(max_length=20, blank=False)
     lastname = models.CharField(max_length=20, blank=False)
     license = models.CharField(max_length=15, blank=False, primary_key=True, unique=True)
-    mobile = models.IntegerField(null=False, blank=False)
+    mobile = models.CharField(max_length=20, null=False, blank=False)
     email = models.EmailField(max_length=50, blank=False, unique=True)
     password = models.CharField(max_length=255, blank=False)
                 
