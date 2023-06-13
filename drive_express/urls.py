@@ -27,6 +27,9 @@ customer_urlpatterns = [
     # path('', customer_views.sendgig_view, name='sendgig'), 
     path('', customer_views.home, name='home'),
     path('profile/', customer_views.profile_page, name="profile"),
+    path('payment_method/', customer_views.payment_page, name="payment"),
+    path('create_gig', customer_views.create_gig, name="create_gig"),
+
 ]
 
 # driver_urlpatterns = [

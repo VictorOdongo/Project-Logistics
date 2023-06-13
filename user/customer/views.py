@@ -61,4 +61,11 @@ def profile_page(request):
         "customer_form": customer_form,
         "password_form": password_form
     })
+    
+    # Job posting
+@login_required(login_url="/sender-login?next=/customer/")
+def create_gig(request):
+         
+    return render(request, 'customer/create_gig.html')
+        
 
