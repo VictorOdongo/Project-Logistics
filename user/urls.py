@@ -16,3 +16,10 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('policy', views.policy, name='policy'),
 ]
+
+customer_urlpatterns = [
+    # path('', customer_views.sendgig_view, name='sendgig'), 
+    path('profile/', views.profile_page, name="profile"),
+    # path('payment_method/', views.payment_page, name="payment"),
+    path('create_gig/', views.create_gig, name="create_gig"),
+]

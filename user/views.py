@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 from .models import Personal, Entreprise, Driver
 
 
@@ -220,5 +221,12 @@ def drivegig_view(request):
 def policy(request):
     return render(request, 'user/policy.html')
 
+def profile_page(request):
+    return render(request, 'customer/profile.html')
+
+login_required(login_url="/sender-login?next=/customer/")
+def create_gig(request):
+         
+    return render(request, 'customer/create_gig.html')
         
         

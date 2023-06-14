@@ -14,7 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 def home(request):
     return redirect(reverse('customer:profile'))
 
-@login_required(login_url="/sender-login?next=/customer/")
+@login_required(login_url="sender-login")
 def profile_page(request):
     user_form = forms.BasicUserForm(instance=request.user)
     customer_form = forms.BasicCustomerForm(instance=request.user.customer)
@@ -49,12 +49,12 @@ def profile_page(request):
                 messages.success(request, 'Your password has been updated')
                 return redirect(reverse('customer:profile'))
 
-        elif request.POST.get('action') == 'update_phone':
-            # Get Firebase user data
-            firebase_user = auth.verify_id_token(request.POST.get('id_token'))
-            request.user.customer.phone_number = firebase_user['phone_number']
-            request.user.customer.save()
-            return redirect(reverse('customer:profile'))
+        # elif request.POST.get('action') == 'update_phone':
+        #     # Get Firebase user data
+        #     firebase_user = auth.verify_id_token(request.POST.get('id_token'))
+        #     request.user.customer.phone_number = firebase_user['phone_number']
+        #     request.user.customer.save()
+        #     return redirect(reverse('customer:profile'))
 
     return render(request, 'customer/profile.html', {
         "user_form": user_form,
@@ -62,10 +62,17 @@ def profile_page(request):
         "password_form": password_form
     })
     
+    
     # Job posting
-@login_required(login_url="/sender-login?next=/customer/")
+@login_required(login_url="sender-login")
 def create_gig(request):
          
     return render(request, 'customer/create_gig.html')
         
+@login_required(login_url="sender-login")
+def payment_page(request):
+         
+    return render(request, 'customer/.html')
+                
+
 
