@@ -10,9 +10,9 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
 
-@login_required()
-def home(request):
-    return redirect(reverse('customer:profile'))
+@login_required(login_url="/sender-login/")
+def sendgig_view(request):
+    return render(request, 'customer/sendgig.html')
 
 @login_required(login_url="/sender-login/")
 def profile_page(request):
@@ -65,14 +65,13 @@ def profile_page(request):
     
     # Job posting
 @login_required(login_url="/sender-login/")
-def create_gig(request):
-         
+def create_gig(request): 
     return render(request, 'customer/create_gig.html')
         
 @login_required(login_url="/sender-login/")
-def payment_page(request):
-         
+def payment_page(request):     
     return render(request, 'customer/.html')
                 
+
 
 

@@ -212,8 +212,8 @@ def drive_login(request):
     
     return render(request, 'user/driver-login.html')
 
-def sendgig_view(request):
-    return render(request, 'customer/sendgig.html')
+# def sendgig_view(request):
+#     return render(request, 'customer/sendgig.html')
 
 def drivegig_view(request):
     return render(request, 'user/drivegig.html')

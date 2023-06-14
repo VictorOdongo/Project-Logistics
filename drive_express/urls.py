@@ -18,18 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from user import views
-
-from user.customer import views as customer_views
-from user.driver import views as driver_views
-
-customer_urlpatterns = [
-    # path('', customer_views.sendgig_view, name='sendgig'), 
-    path('', customer_views.home, name='home'),
-    path('profile/', customer_views.profile_page, name="profile"),
-    path('payment_method/', customer_views.payment_page, name="payment"),
-    # path('create_gig', customer_views.create_gig, name="create_gig"),
-]
+# from user import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
