@@ -14,7 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 def home(request):
     return redirect(reverse('customer:profile'))
 
-@login_required(login_url="sender-login")
+@login_required(login_url="/sender-login/")
 def profile_page(request):
     user_form = forms.BasicUserForm(instance=request.user)
     customer_form = forms.BasicCustomerForm(instance=request.user.customer)
@@ -64,12 +64,12 @@ def profile_page(request):
     
     
     # Job posting
-@login_required(login_url="sender-login")
+@login_required(login_url="/sender-login/")
 def create_gig(request):
          
     return render(request, 'customer/create_gig.html')
         
-@login_required(login_url="sender-login")
+@login_required(login_url="/sender-login/")
 def payment_page(request):
          
     return render(request, 'customer/.html')
