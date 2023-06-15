@@ -62,7 +62,7 @@
           <div class="col-lg-4">
             <div class="text-center">
               <img
-                src="{% static 'img/avatar.png' %}"
+                src="{% if request.user.customer.avatar %}{{ request.user.customer.avatar.url }}{% else %}{% static 'img/avatar.png' %}{% endif %}"
                 alt=""
                 class="rounded-circle mb-2"
                 width="100"

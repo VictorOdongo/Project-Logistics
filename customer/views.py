@@ -22,7 +22,7 @@ def profile_page(request):
     
     if request.method == 'POST':
         user_form = forms.BasicUserForm(request.POST, instance=request.user)
-        customer_form = forms.BasicCustomerForm(request.POST, request.FILES, instance=request.user.Personal)
+        customer_form = forms.BasicCustomerForm(request.POST, request.FILES, instance=request.user)
         password_form = PasswordChangeForm(request.user)
 
     if request.method == "POST":
