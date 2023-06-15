@@ -40,15 +40,13 @@
         </li>
       </ul>
     </nav>
+    <div>
+      {% for message in messages %}
+      <h5 style="color: coral">{{message}}</h5>
+      {% endfor %}
+    </div>
     <div class="wrapper">
-      <div>
-        {% for message in messages %}
-        <h5 style="color: coral">{{message}}</h5>
-        {% endfor %}
-      </div>
-      <h3>
-        Driver Sign Up
-      </h3>
+      <h3>Driver Sign Up</h3>
       <form action="" method="POST">
         {% csrf_token %}
         <input type="text" name="firstname" placeholder="First Name" />
@@ -65,7 +63,7 @@
           DriveX's <a href="#">Privacy and Terms.</a></label
         >
       </div>
-      
+
       <div class="member">
         Have an account? <a href="{% url 'user:driver-login' %}">Login Here</a>
       </div>

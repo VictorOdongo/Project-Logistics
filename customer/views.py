@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from customer import forms
-from django.contrib import messages
+from django.contrib import messages as message_profile
 from django.conf import settings
 from user.models import *
 
@@ -37,7 +37,7 @@ def profile_page(request):
                 user_form.save()
                 customer_form.save()
 
-                messages.success(request, 'Your profile has been updated')
+                message_profile.success(request, 'Your profile has been updated')
                 return redirect(reverse('customer:profile'))
 
         elif request.POST.get('action') == 'update_password':
@@ -46,7 +46,7 @@ def profile_page(request):
                 user = password_form.save()
                 update_session_auth_hash(request, user)
 
-                messages.success(request, 'Your password has been updated')
+                message_profile.success(request, 'Your password has been updated')
                 return redirect(reverse('customer:profile'))
 
         # elif request.POST.get('action') == 'update_phone':

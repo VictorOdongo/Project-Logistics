@@ -33,28 +33,33 @@
       </div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="#">Sender</a>
+          <a class="nav-link active text-white" aria-current="page" href="#"
+            >Sender</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="#">Login!</a>
+          <a class="nav-link active text-white" aria-current="page" href="#"
+            >Login!</a
+          >
         </li>
       </ul>
     </nav>
+    <div>
+      {% for message in messages %}
+      <h5 style="color: coral">{{message}}</h5>
+      {% endfor %}
+    </div>
     <div class="wrapper2">
       <h2>Sender Sign In</h2>
-      <div>
-      {% for message in messages %}
-      <h5 style="color:coral">{{message}}</h5>
-      {% endfor %}
-      </div>
       <form action="{% url 'user:sender-login' %}" method="POST">
         {% csrf_token %}
-        <input type="text" name="email"  placeholder="Email Address" />
+        <input type="text" name="email" placeholder="Email Address" />
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Sign In</button>
       </form>
       <div class="member">
-        Not a member? <a href="{% url 'user:personal-signup' %}">Register Now</a>
+        Not a member?
+        <a href="{% url 'user:personal-signup' %}">Register Now</a>
       </div>
     </div>
     <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>

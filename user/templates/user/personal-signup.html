@@ -40,12 +40,12 @@
         </li>
       </ul>
     </nav>
+    <div>
+      {% for message in messages %}
+      <h5 style="color: coral">{{message}}</h5>
+      {% endfor %}
+    </div>
     <div class="wrapper">
-      <div>
-        {% for message in messages %}
-        <h5 style="color: coral">{{message}}</h5>
-        {% endfor %}
-      </div>
       <h3>Create a personal account</h3>
       <form action="" method="POST">
         {% csrf_token %}
