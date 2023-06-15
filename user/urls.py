@@ -12,7 +12,7 @@ urlpatterns = [
     path('driver-login', views.drive_login, name='driver-login'), 
     path('sender-login', views.sender_login, name='sender-login'),    
     # path('sendgig', views.sendgig_view, name='sendgig'), 
-    path('drivegig', views.drivegig_view, name='drivegig'),
+    # path('drivegig', views.drivegig_view, name='drivegig'),
     path('logout', views.logout, name='logout'),
     path('policy', views.policy, name='policy'),
 ]

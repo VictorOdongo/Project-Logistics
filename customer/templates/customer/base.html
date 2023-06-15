@@ -28,7 +28,7 @@
               >{{user.username}}!</a
             >
           </li>
-          <a href="logout"
+          <a href="{% url 'user:logout' %}"
             ><button
               class="btn btn-info btn-lg"
               type="submit"

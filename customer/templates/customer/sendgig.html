@@ -1,4 +1,11 @@
 {% load static %}
+
+{% block content %}
+
+{% url 'customer:create_gig' as create_gig_url %}
+{% url 'customer:profile' as profile_url %}
+{% url 'customer:payment_method' as payment_method_url %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,7 +40,7 @@
               >{{user.username}}!</a
             >
           </li>
-          <a href="logout"
+          <a href="{% url 'user:logout' %}"
             ><button
               class="btn btn-info btn-lg"
               type="submit"
@@ -59,12 +66,14 @@
               <h4>{{ request.user.get_full_name }}</h4>
               <p class="text-secondary">{{ request.user.email }}</p>
             </div>
-            <ul class="list-group">
-              <li class="list-group-item">Post Delivery Gig</li>
-              <li class="list-group-item">Current Gigs</li>
-              <li class="list-group-item">Profile Details</li>
-              <li class="list-group-item">Payment Details</li>
+
+            <ul class="list-group mt-5">
+              <a href="{% url 'customer:create_gig' %}" class="list-group-item list-group-item-action {% if request.path == create_gig_url %}active{% endif %}">Post Delivery Gig</a>
+              <a href="#" class="list-group-item list-group-item-action">Current Gigs</a>
+              <a href="{% url 'customer:profile' %}" class="list-group-item list-group-item-action {% if request.path == profile_url %}active{% endif %}">Profile Details</a>
+              <a href="{% url 'customer:payment_method' %}" class="list-group-item list-group-item-action {% if request.path == payment_method_url %}active{% endif %}">Payment Details</a>
             </ul>
+
           </div>
           <div class="col-lg-8">{% block main %} {% endblock %}</div>
         </div>
@@ -85,3 +94,4 @@
     ></script>
   </body>
 </html>
+{% endblock %}

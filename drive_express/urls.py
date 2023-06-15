@@ -24,5 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls')),
     path('user/', include('django.contrib.auth.urls')),
+    path('customer/', include('customer.urls', namespace='customer')),
+    path('driver/', include('driver.urls', namespace='driver')),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from user.customer import forms
+from customer import forms
 from django.contrib import messages
 from django.conf import settings
 from user.models import *
@@ -17,12 +17,12 @@ def sendgig_view(request):
 @login_required(login_url="/sender-login/")
 def profile_page(request):
     user_form = forms.BasicUserForm(instance=request.user)
-    customer_form = forms.BasicCustomerForm(instance=request.user.customer)
+    customer_form = forms.BasicCustomerForm(instance=request.user)
     password_form = PasswordChangeForm(request.user)
     
     if request.method == 'POST':
         user_form = forms.BasicUserForm(request.POST, instance=request.user)
-        customer_form = forms.BasicCustomerForm(instance=request.user.customer)
+        customer_form = forms.BasicCustomerForm(instance=request.user)
         password_form = PasswordChangeForm(request.user)
 
     if request.method == "POST":
@@ -31,7 +31,7 @@ def profile_page(request):
             user_form = forms.BasicUserForm(
                 request.POST, instance=request.user)
             customer_form = forms.BasicCustomerForm(
-                request.POST, request.FILES, instance=request.user.customer)
+                request.POST, request.FILES, instance=request.user)
 
             if user_form.is_valid() and customer_form.is_valid():
                 user_form.save()
@@ -67,10 +67,12 @@ def profile_page(request):
 @login_required(login_url="/sender-login/")
 def create_gig(request): 
     return render(request, 'customer/create_gig.html')
-        
+       
+       
+    # Payment method 
 @login_required(login_url="/sender-login/")
-def payment_page(request):     
-    return render(request, 'customer/.html')
+def payment_method(request):     
+    return render(request, 'customer/payment_method.html')
                 
 
 
