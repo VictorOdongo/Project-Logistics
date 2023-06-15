@@ -53,7 +53,7 @@ class Job(models.Model):
     quantity = models.IntegerField(default=1)
     photo = models.ImageField(upload_to="job/photos/")
     status = models.CharField(max_length=20, choices=STATUSES, default=CREATING_STATUS)
-    create_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name
