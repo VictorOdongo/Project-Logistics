@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'user.middleware.ProfileMiddleware',
 ]
 
 ROOT_URLCONF = 'drive_express.urls'
@@ -134,6 +135,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = 'sender-login'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "user/static")
