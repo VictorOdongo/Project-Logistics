@@ -65,7 +65,7 @@ def profile_page(request):
     # Job posting
 @login_required(login_url="/sender-login/")
 def create_gig(request):
-    current_customer = request.user.customer
+    current_customer = request.user
     
     creating_job = Job.objects.filter(customer=current_customer, status=Job.CREATING_STATUS).last()
     step1_form = forms.JobCreateStep1Form(instance=creating_job)
@@ -87,7 +87,9 @@ def create_gig(request):
     
      
     return render(request, 'customer/create_gig.html', {
-        "step1_form": step1_form
+        "step1_form": step1_form,
+        "job": creating_job,
+        "step": current_step,
     })
        
        

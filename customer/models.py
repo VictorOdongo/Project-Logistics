@@ -1,8 +1,8 @@
 import uuid
 from django.db import models
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
 from django.utils import timezone
+from user.models import Personal
+
 
 
 class Category(models.Model):
@@ -43,9 +43,7 @@ class Job(models.Model):
         )
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    customer_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    customer_id = models.PositiveIntegerField()
-    customer = GenericForeignKey('customer_type', 'customer_id')
+    customer = models.ForeignKey(Personal, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)

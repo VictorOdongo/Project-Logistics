@@ -85,7 +85,7 @@
               >
                 <li class="nav-item" role="presentation">
                   <a
-                    class="active"
+                    class="{% if step == 1 %}active{% endif %}"
                     id="pills-info-tab"
                     data-toggle="pill"
                     href="#pills-info"
@@ -97,7 +97,8 @@
                 </li>
                 <i class="fas fa-chevron-right"></i>
                 <li class="nav-item" role="presentation">
-                  <a
+                  <a 
+                    class="{% if step == 2 %}active{% endif %}"                
                     id="pills-pickup-tab"
                     data-toggle="pill"
                     href="#pills-pickup"
@@ -109,7 +110,8 @@
                 </li>
                 <i class="fas fa-chevron-right"></i>
                 <li class="nav-item" role="presentation">
-                  <a
+                  <a 
+                    class="{% if step == 3 %}active{% endif %}"
                     id="pills-delivery-tab"
                     data-toggle="pill"
                     href="#pills-delivery"
@@ -121,7 +123,8 @@
                 </li>
                 <i class="fas fa-chevron-right"></i>
                 <li class="nav-item" role="presentation">
-                  <a
+                  <a 
+                    class="{% if step == 4 %}active{% endif %}"
                     id="pills-payment-tab"
                     data-toggle="pill"
                     href="#pills-payment"
@@ -139,7 +142,7 @@
           <b>CREATE A GIG</b>
           <div class="tab-content" id="pills-tabContent">
             <div
-              class="tab-pane fade show active"
+              class="tab-pane fade {% if step == 1 %}show active{% endif %}"
               id="pills-info"
               role="tabpanel"
               aria-labelledby="pills-info-tab"
@@ -161,7 +164,7 @@
             </div>
 
             <div
-              class="tab-pane fade"
+              class="tab-pane fade {% if step == 2 %}show active{% endif %}"
               id="pills-pickup"
               role="tabpanel"
               aria-labelledby="pills-pickup-tab"
@@ -170,7 +173,7 @@
             </div>
 
             <div
-              class="tab-pane fade"
+              class="tab-pane fade {% if step == 3 %}show active{% endif %}"
               id="pills-delivery"
               role="tabpanel"
               aria-labelledby="pills-delivery-tab"
@@ -179,7 +182,7 @@
             </div>
 
             <div
-              class="tab-pane fade"
+              class="tab-pane fade {% if step == 4 %}show active{% endif %}"
               id="pills-payment"
               role="tabpanel"
               aria-labelledby="pills-payment-tab"
