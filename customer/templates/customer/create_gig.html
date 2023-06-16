@@ -1,4 +1,6 @@
-{% load static %} {% block content %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -143,7 +145,21 @@
               aria-labelledby="pills-info-tab"
             >
               <h1>Item Info</h1>
+
+              <form action="POST" enctype="multipart/form-data">
+                <b class="text-secondary">Item Information</b><br/>
+                <div class="card bg-white mt-2 mb-5">
+                  <div class="card-body">
+                    {% csrf_token %}
+                    {% bootstrap_form step1_form %}
+                  </div>
+                </div>
+                <input type="hidden" name="step" value="1">
+                <button type="submit" class="btn btn-info">Save & Continue</button>
+
+              </form>
             </div>
+
             <div
               class="tab-pane fade"
               id="pills-pickup"
@@ -152,6 +168,7 @@
             >
               <h1>PickUp</h1>
             </div>
+
             <div
               class="tab-pane fade"
               id="pills-delivery"
@@ -160,6 +177,7 @@
             >
               <h1>Delivery</h1>
             </div>
+
             <div
               class="tab-pane fade"
               id="pills-payment"

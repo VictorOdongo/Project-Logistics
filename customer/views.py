@@ -4,7 +4,7 @@ from django.urls import reverse
 from customer import forms
 from django.contrib import messages as message_profile
 from django.conf import settings
-from user.models import *
+from customer.models import *
 
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -64,8 +64,31 @@ def profile_page(request):
     
     # Job posting
 @login_required(login_url="/sender-login/")
-def create_gig(request): 
-    return render(request, 'customer/create_gig.html')
+def create_gig(request):
+    current_customer = request.user.customer
+    
+    creating_job = Job.objects.filter(customer=current_customer, status=Job.CREATING_STATUS).last()
+    step1_form = forms.JobCreateStep1Form(instance=creating_job)
+    
+    if request.method == "POST":
+        if request.POST.get('step') == '1':
+            step1_form = forms.JobCreateStep1Form(request.POST, request.FILES, instance=creating_job)
+            if step1_form.is_valid():
+                creating_job = step1_form.save(commit=False)
+                creating_job.customer = current_customer
+                creating_job.save()
+                return redirect(reverse('customer:create_gig'))
+     
+    #determine the current step
+    if not creating_job:
+        current_step = 1
+    else:
+        current_step = 2
+    
+     
+    return render(request, 'customer/create_gig.html', {
+        "step1_form": step1_form
+    })
        
        
     # Payment method 
