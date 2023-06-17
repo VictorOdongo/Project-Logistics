@@ -46,12 +46,13 @@
       {% endfor %}
     </div>
     <div class="wrapper">
-      <h3>Create a personal account</h3>
+      <h4>Create an account now and start sending.</h4>
       <form action="" method="POST">
         {% csrf_token %}
         <input type="text" name="username" placeholder="User Name" />
         <input type="text" name="firstname" placeholder="First Name" />
         <input type="text" name="lastname" placeholder="Last Name" />
+        <input type="tel" name="mobile" placeholder="Mobile Number" />
         <input type="email" name="email" placeholder="Email Address" />
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Sign Up</button>

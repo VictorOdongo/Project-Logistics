@@ -23,6 +23,7 @@ def personal_signup(request):
         lastname = request.POST['lastname']
         email = request.POST['email']
         password = request.POST['password']
+        mobile = request.POST['mobile']
         
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
@@ -39,6 +40,7 @@ def personal_signup(request):
         )
             user.first_name = firstname
             user.last_name = lastname
+            user.mobile = mobile
             user.save()
             
         personal = Personal.objects.create(
@@ -46,6 +48,7 @@ def personal_signup(request):
                 username=u_name,
                 firstname=firstname,
                 lastname=lastname,
+                mobile=mobile,
                 email=email,
                 password=password
             )
