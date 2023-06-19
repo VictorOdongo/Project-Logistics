@@ -1,4 +1,4 @@
-from .models import Personal, Entreprise
+from .models import Personal
 
 class ProfileMiddleware:
     def __init__(self, get_response):

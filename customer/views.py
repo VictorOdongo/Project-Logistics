@@ -65,8 +65,24 @@ def profile_page(request):
     # Job posting
 @login_required(login_url="/sender-login/")
 def create_gig(request):
+    current_customer =request.user.personal
     
-    return render(request, 'customer/create_gig.html')
+    creating_job = Job.objects.filter(customer=current_customer, status=Job.CREATING_STATUS).last()
+    step1_form = forms.JobCreateStep1Form(instance=creating_job)
+    
+    if request.method == "POST":
+        if request.POST.get('step') == '1':
+            step1_form = forms.JobCreateStep1Form(request.POST, request.FILES, instance=creating_job)
+            if step1_form.is_valid():
+                creating_job = step1_form.save(commit=False)
+                creating_job.customer = current_customer
+                creating_job.save()
+                return redirect(reverse('customer:create_gig'))
+                           
+    return render(request, 'customer/create_gig.html', {
+        "step1_form": step1_form,
+        "job": creating_job,
+    })
        
        
     # Payment method 
