@@ -69,6 +69,7 @@ def create_gig(request):
     
     creating_job = Job.objects.filter(customer=current_customer, status=Job.CREATING_STATUS).last()
     step1_form = forms.JobCreateStep1Form(instance=creating_job)
+    step2_form = forms.JobCreateStep2Form(instance=creating_job)
     
     if request.method == "POST":
         if request.POST.get('step') == '1':
@@ -78,10 +79,18 @@ def create_gig(request):
                 creating_job.customer = current_customer
                 creating_job.save()
                 return redirect(reverse('customer:create_gig'))
+            
+    #Determine the current step
+    if not creating_job:
+        current_step = 1
+    else:
+        current_step = 2
                            
     return render(request, 'customer/create_gig.html', {
-        "step1_form": step1_form,
         "job": creating_job,
+        "step": current_step,
+        "step1_form": step1_form,
+        "step2_form": step2_form,
     })
        
        

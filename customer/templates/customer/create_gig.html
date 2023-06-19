@@ -1,6 +1,4 @@
-{% load static %}
-{% load bootstrap4 %}
-{% block content %}
+{% load static %} {% load bootstrap4 %} {% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,6 +16,10 @@
       href="https://use.fontawesome.com/releases/v5.9.0/css/all.css"
     />
     {% block head %}
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAPf-PH9qBF_HugsrYjn_lXTJlFvhE0Wk&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
     <style>
       #pills-tab a {
         color: black;
@@ -28,6 +30,9 @@
       }
       #pills-tab a.active {
         color: #0dcaf0;
+      }
+      #pickup-map {
+        height: 100%;
       }
     </style>
     {% endblock %}
@@ -97,8 +102,8 @@
                 </li>
                 <i class="fas fa-chevron-right"></i>
                 <li class="nav-item" role="presentation">
-                  <a 
-                    class="{% if step == 2 %}active{% endif %}"                
+                  <a
+                    class="{% if step == 2 %}active{% endif %}"
                     id="pills-pickup-tab"
                     data-toggle="pill"
                     href="#pills-pickup"
@@ -110,7 +115,7 @@
                 </li>
                 <i class="fas fa-chevron-right"></i>
                 <li class="nav-item" role="presentation">
-                  <a 
+                  <a
                     class="{% if step == 3 %}active{% endif %}"
                     id="pills-delivery-tab"
                     data-toggle="pill"
@@ -123,7 +128,7 @@
                 </li>
                 <i class="fas fa-chevron-right"></i>
                 <li class="nav-item" role="presentation">
-                  <a 
+                  <a
                     class="{% if step == 4 %}active{% endif %}"
                     id="pills-payment-tab"
                     data-toggle="pill"
@@ -140,6 +145,7 @@
 
           <!-- step-forms -->
           <b>CREATE A DELIVERY GIG</b>
+          
           <div class="tab-content" id="pills-tabContent">
             <div
               class="tab-pane fade {% if step == 1 %}show active{% endif %}"
@@ -149,17 +155,17 @@
             >
               <h1>Item Info</h1>
 
-              <form action="POST" enctype="multipart/form-data">
-                <b class="text-secondary">Item Information</b><br/>
+              <form method="POST" action="" enctype="multipart/form-data">
+                <b class="text-secondary">Item Information</b><br />
                 <div class="card bg-white mt-2 mb-5">
                   <div class="card-body">
-                    {% csrf_token %}
-                    {% bootstrap_form step1_form %}
+                    {% csrf_token %} {% bootstrap_form step1_form %}
                   </div>
                 </div>
-                <input type="hidden" name="step" value="1">
-                <button type="submit" class="btn btn-info">Save & Continue</button>
-
+                <input type="hidden" name="step" value="1" />
+                <button type="submit" class="btn btn-info">
+                  Save & Continue
+                </button>
               </form>
             </div>
 
@@ -170,6 +176,26 @@
               aria-labelledby="pills-pickup-tab"
             >
               <h1>PickUp</h1>
+
+              <form method="POST" action="" enctype="multipart/form-data">
+                <b class="text-secondary">Pickup Information</b><br />
+                <div class="card bg-white mt-2 mb-5">
+                  <div class="card-body">
+                    {% csrf_token %} {% bootstrap_form step2_form %}
+                  </div>
+                </div>
+                <input type="hidden" name="step" value="2" />
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  onclick="$('#pills-info-tab').tab('show');"
+                >
+                  Back
+                </button>
+                <button type="submit" class="btn btn-info">
+                  Save & Continue
+                </button>
+              </form>
             </div>
 
             <div
