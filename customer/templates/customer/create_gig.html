@@ -200,7 +200,7 @@
                       <div class="col-lg-4">
                         <div id="pickup-map"></div>
                         <div id="infowindow-content">
-                          <!-- <img src="" width="16" height="16" id="place-icon" /> -->
+                          <!-- <img src="" width="16" height="16" id="pickup-place-icon" /> -->
                           <span id="place-name" class="title"></span><br />
                           <span id="place-address"></span>
                         </div>
@@ -329,11 +329,11 @@
           marker.setVisible(true);
           infowindowContent.children["place-icon"].textContent = place.icon;
           infowindowContent.children["place-name"].textContent = place.name;
-          infowindowContent.children["place-address"].textContent = place.formatted_address;
+          infowindowContent.children["place-address"].textContent = address;
           infowindow.open(map, marker);
 
-          $("#pickup_lat").val(place.geometry.location.lat)
-          $("#pickup_lng").val(place.geometry.location.lng)
+          $("#pickup_lat").val(place.geometry.location.lat());
+          $("#pickup_lng").val(place.geometry.location.lng());
         });
 
         // Sets a listener on a radio button to change the filter type on Places
