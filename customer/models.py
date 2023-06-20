@@ -54,8 +54,8 @@ class Job(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     
     pickup_address = models.CharField(max_length=255, blank=True)
-    pickup_lat = models.FloatField(default=10)
-    pickup_lng = models.FloatField(default=10)
+    pickup_lat = models.FloatField(default=0.0)
+    pickup_lng = models.FloatField(default=0.0)
     pickup_name = models.CharField(max_length=255, blank=True)
     pickup_phone = models.CharField(max_length=255, blank=True)
 
