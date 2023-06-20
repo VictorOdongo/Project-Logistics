@@ -41,7 +41,8 @@ class Job(models.Model):
             ('personal', 'Personal'),
             ('entreprise', 'Entreprise'),
         )
-
+    
+    # step 1
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Personal, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
@@ -53,11 +54,20 @@ class Job(models.Model):
     status = models.CharField(max_length=20, choices=STATUSES, default=CREATING_STATUS)
     created_at = models.DateTimeField(default=timezone.now)
     
+    # step 2
     pickup_address = models.CharField(max_length=255, blank=True)
     pickup_lat = models.FloatField(default=0.0)
     pickup_lng = models.FloatField(default=0.0)
     pickup_name = models.CharField(max_length=255, blank=True)
     pickup_phone = models.CharField(max_length=255, blank=True)
+    
+    # step 3
+    delivery_address = models.CharField(max_length=255, blank=True)
+    delivery_lat = models.FloatField(default=0.0)
+    delivery_lng = models.FloatField(default=0.0)
+    delivery_name = models.CharField(max_length=255, blank=True)
+    delivery_phone = models.CharField(max_length=255, blank=True)
+
 
 
 
