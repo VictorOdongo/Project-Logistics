@@ -74,7 +74,25 @@
           <div class="card">
             <div class="card-header">JOB SUMMARY</div>
             <div class="card-body">
+              {% if not job %}
               <p>A summary of you delivery information will appear here</p>
+              {% else %}
+
+              {% if step > 1 %}
+              <h4>{{ job.name }}</h4>
+              <span>{{ job.quantity }} Item</span><br />
+              <span>{{ job.get_size_display }} Job</span>
+              {% endif %}
+
+              {% if step > 2 %}
+              <hr/>
+              <p class="text-secondary"><small><b>PICKUP</b></small></p>
+              <h4>{{ job.pickup_name }}</h4>
+              <span>{{ job.pickup_address }}</span><br />
+              {% endif %}
+
+
+              {% endif %}
             </div>
           </div>
         </div>
@@ -188,18 +206,19 @@
                           hidden
                           id="pickup_lat"
                           name="pickup_lat"
-                          value="{{job.pickup_lat}}"
+                          value="{{ job.pickup_lat }}"
                         />
                         <input
                           hidden
                           id="pickup_lng"
                           name="pickup_lng"
-                          value="{{job.pickup_lng}}"
+                          value="{{ job.pickup_lng }}"
                         />
                       </div>
                       <div class="col-lg-4">
                         <div id="pickup-map"></div>
                         <div id="infowindow-content">
+                          <span id="place-icon"></span>
                           <!-- <img src="" width="16" height="16" id="pickup-place-icon" /> -->
                           <span id="place-name" class="title"></span><br />
                           <span id="place-address"></span>
@@ -261,13 +280,24 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      var pickupLat = parseFloat('{{ job.pickup_lat }}');
+      var pickupLng = parseFloat('{{ job.pickup_lng }}');
       
       function initMap() {
         const map = new google.maps.Map(document.getElementById("pickup-map"), {
-          center: { lat: -1.1821, lng: 36.9366 },
+          center: { lat: pickupLat || -1.1821, lng: pickupLng || 36.9366 },
           zoom: 15,
           mapTypeControl: false,
         });
+
+        if (pickupLat && pickupLng) {
+          new google.maps.Marker({
+            position: new google.maps.LatLng(pickupLat, pickupLng),
+            map: map,
+          })
+        }
+
+
         const input = document.getElementById("id_pickup_address");
         const biasInputElement = document.getElementById("use-location-bias");
         const strictBoundsInputElement =
@@ -327,6 +357,19 @@
 
           marker.setPosition(place.geometry.location);
           marker.setVisible(true);
+          let address = "";
+
+          if (place.address_components){
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name) || "",
+              (place.address_components[1] && place.address_components[1].short_name) || "",
+              (place.address_components[2] && place.address_components[2].short_name) || "",
+            ].join(" ");
+            // Set the lat and lng values in the respective hidden input fields
+            document.getElementById("pickup_lat").value = place.geometry.location.lat();
+            document.getElementById("pickup_lng").value = place.geometry.location.lng();
+          }
+
           infowindowContent.children["place-icon"].textContent = place.icon;
           infowindowContent.children["place-name"].textContent = place.name;
           infowindowContent.children["place-address"].textContent = place.formatted_address;
