@@ -183,7 +183,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-lg-8">
-                        {% csrf_token %} {% bootstrap_form step2_form %}
+                        {% csrf_token %} {% bootstrap_form step2_form exclude='pickup_lat, pickup_lng' %}
                         <input
                           hidden
                           id="pickup_lat"
@@ -200,7 +200,7 @@
                       <div class="col-lg-4">
                         <div id="pickup-map"></div>
                         <div id="infowindow-content">
-                          <img src="" width="16" height="16" id="place-icon" />
+                          <!-- <img src="" width="16" height="16" id="place-icon" /> -->
                           <span id="place-name" class="title"></span><br />
                           <span id="place-address"></span>
                         </div>
@@ -264,12 +264,11 @@
       
       function initMap() {
         const map = new google.maps.Map(document.getElementById("pickup-map"), {
-          center: { lat: 40.749933, lng: -73.98633 },
-          zoom: 13,
+          center: { lat: -1.1821, lng: 36.9366 },
+          zoom: 15,
           mapTypeControl: false,
         });
-        const card = document.getElementById("pac-card");
-        const input = document.getElementById("pac-input");
+        const input = document.getElementById("id_pickup_address");
         const biasInputElement = document.getElementById("use-location-bias");
         const strictBoundsInputElement =
           document.getElementById("use-strict-bounds");
@@ -279,7 +278,6 @@
           types: ["establishment"],
         };
 
-        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
         const autocomplete = new google.maps.places.Autocomplete(
           input,
@@ -290,6 +288,9 @@
         // so that the autocomplete requests use the current map bounds for the
         // bounds option in the request.
         autocomplete.bindTo("bounds", map);
+
+        // set the data fields to return when the user selects a place
+        autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
 
         const infowindow = new google.maps.InfoWindow();
         const infowindowContent = document.getElementById("infowindow-content");
@@ -330,6 +331,9 @@
           infowindowContent.children["place-name"].textContent = place.name;
           infowindowContent.children["place-address"].textContent = place.formatted_address;
           infowindow.open(map, marker);
+
+          $("#pickup_lat").val(place.geometry.location.lat)
+          $("#pickup_lng").val(place.geometry.location.lng)
         });
 
         // Sets a listener on a radio button to change the filter type on Places
@@ -382,7 +386,7 @@
       //   });
        }
 
-      window.initMap = initMap;
+      // window.initMap = initMap;
     </script>
   </body>
 </html>
