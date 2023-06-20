@@ -329,7 +329,7 @@
           marker.setVisible(true);
           infowindowContent.children["place-icon"].textContent = place.icon;
           infowindowContent.children["place-name"].textContent = place.name;
-          infowindowContent.children["place-address"].textContent = address;
+          infowindowContent.children["place-address"].textContent = place.formatted_address;
           infowindow.open(map, marker);
 
           $("#pickup_lat").val(place.geometry.location.lat());
@@ -386,7 +386,7 @@
       //   });
        }
 
-      // window.initMap = initMap;
+      window.initMap = initMap;
     </script>
   </body>
 </html>
