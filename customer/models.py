@@ -67,6 +67,11 @@ class Job(models.Model):
     delivery_lng = models.FloatField(default=0.0)
     delivery_name = models.CharField(max_length=255, blank=True)
     delivery_phone = models.CharField(max_length=255, blank=True)
+    
+    # step 4
+    duration = models.IntegerField(default=0)
+    distance = models.FloatField(default=0)
+    price = models.FloatField(default=0)
 
 
 

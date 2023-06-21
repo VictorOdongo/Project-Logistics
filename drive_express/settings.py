@@ -158,3 +158,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'victorodongo397@gmail.com'
 EMAIL_HOST_PASSWORD = 'fveqkdezrkhrludf'
 DEFAULT_FROM_EMAIL = 'drive_express <no-reply@drive_express.localhost>'
+
+
+GOOGLE_MAP_API_KEY = "AIzaSyAAPf-PH9qBF_HugsrYjn_lXTJlFvhE0Wk"
