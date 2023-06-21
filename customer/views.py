@@ -119,7 +119,37 @@ def create_gig(request):
                
                 return redirect(reverse('customer:create_gig'))
             
-            
+        elif request.POST.get('step') == '4':
+            if creating_job.price:
+                try:
+                    # payment_intent = stripe.PaymentIntent.create(
+                    #     amount=int(creating_job.price * 100),
+                    #     currency='usd',
+                    #     automatic_payment_methods={"enabled": True},
+                    #     customer=current_customer.stripe_customer_id,
+                    #     payment_method=current_customer.stripe_payment_method_id,
+                    #     off_session=True,
+                    #     confirm=True,
+                    # )
+                    
+                    # Transaction.objects.create(
+                    #     stripe_payment_intent_id = payment_intent['id'],
+                    #     job = creating_job,
+                    #     amount = creating_job.price,
+                    # )
+                    
+                    # creating_job.status = Job.PROCESSING_STATUS
+                    # creating_job.save()
+                    
+                    return redirect(reverse('customer:sendgig'))
+                    
+                except stripe.error.CardError as e:
+                    err = e.error
+                    # Error code will be authentication_required if authentication is needed
+                    print("Code is: %s" % err.code)
+                    payment_intent_id = err.payment_intent['id']
+                    payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+                                
     #Determine the current step
     if not creating_job:
         current_step = 1

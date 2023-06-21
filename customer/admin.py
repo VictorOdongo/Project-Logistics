@@ -3,3 +3,4 @@ from customer import models
 
 admin.site.register(models.Category)
 admin.site.register(models.Job)
+admin.site.register(models.Transaction)

@@ -31,7 +31,8 @@
       #pills-tab a.active {
         color: #0dcaf0;
       }
-      #pickup-map, #delivery-map {
+      #pickup-map,
+      #delivery-map {
         height: 100%;
       }
     </style>
@@ -76,31 +77,25 @@
             <div class="card-body">
               {% if not job %}
               <p>A summary of you delivery information will appear here</p>
-              {% else %}
-
-              {% if step > 1 %}
+              {% else %} {% if step > 1 %}
               <h4>{{ job.name }}</h4>
               <span>{{ job.quantity }} Item</span><br />
               <span>{{ job.get_size_display }} Job</span>
-              {% endif %}
-
-              {% if step > 2 %}
-              <hr/>
-              <p class="text-secondary"><small><b>PICKUP</b></small></p>
+              {% endif %} {% if step > 2 %}
+              <hr />
+              <p class="text-secondary">
+                <small><b>PICKUP</b></small>
+              </p>
               <h4>{{ job.pickup_name }}</h4>
               <span>{{ job.pickup_address }}</span><br />
-              {% endif %}
-
-              {% if step > 3 %}
-              <hr/>
-              <p class="text-secondary"><small><b>DELIVERY</b></small></p>
+              {% endif %} {% if step > 3 %}
+              <hr />
+              <p class="text-secondary">
+                <small><b>DELIVERY</b></small>
+              </p>
               <h4>{{ job.delivery_name }}</h4>
               <span>{{ job.delivery_address }}</span><br />
-              {% endif %}
-
-
-
-              {% endif %}
+              {% endif %} {% endif %}
             </div>
           </div>
         </div>
@@ -209,7 +204,8 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-lg-8">
-                        {% csrf_token %} {% bootstrap_form step2_form exclude='pickup_lat, pickup_lng' %}
+                        {% csrf_token %} {% bootstrap_form step2_form
+                        exclude='pickup_lat, pickup_lng' %}
                         <input
                           hidden
                           id="pickup_lat"
@@ -228,7 +224,8 @@
                         <div id="pickup-infowindow-content">
                           <span id="place-icon"></span>
                           <!-- <img src="" width="16" height="16" id="pickup-place-icon" /> -->
-                          <span id="pickup-place-name" class="title"></span><br />
+                          <span id="pickup-place-name" class="title"></span
+                          ><br />
                           <span id="pickup-place-address"></span>
                         </div>
                       </div>
@@ -265,7 +262,8 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-lg-8">
-                        {% csrf_token %} {% bootstrap_form step3_form exclude='delivery_lat, delivery_lng' %}
+                        {% csrf_token %} {% bootstrap_form step3_form
+                        exclude='delivery_lat, delivery_lng' %}
                         <input
                           hidden
                           id="delivery_lat"
@@ -284,7 +282,8 @@
                         <div id="delivery-infowindow-content">
                           <span id="delivery-place-icon"></span>
                           <!-- <img src="" width="16" height="16" id="delivery-place-icon" /> -->
-                          <span id="delivery-place-name" class="title"></span><br />
+                          <span id="delivery-place-name" class="title"></span
+                          ><br />
                           <span id="delivery-place-address"></span>
                         </div>
                       </div>
@@ -303,7 +302,6 @@
                   Save & Continue
                 </button>
               </form>
-
             </div>
 
             <!-- step 4 -->
@@ -315,6 +313,36 @@
               aria-labelledby="pills-payment-tab"
             >
               <h1>Payment</h1>
+
+              <form method="POST">
+                <b class="text-secondary">Payment Method</b>
+                <div class="card bg-white mt-2 mb-5">
+                  <div class="card-body">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label>Your Credit/Debit Card</label>
+                      <input
+                        class="form-control"
+                        value="**** **** **** {{ request.user.customer.stripe_card_last4 }}"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Price</label>
+                      <input class="form-control" value="${{ job.price }}" />
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" name="step" value="4" />
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  onclick="$('#pills-delivery-tab').tab('show');"
+                >
+                  Back
+                </button>
+                <button type="submit" class="btn btn-info">Create Gig</button>
+              </form>
             </div>
           </div>
         </div>
@@ -334,27 +362,28 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      var pickupLat = parseFloat('{{ job.pickup_lat }}');
-      var pickupLng = parseFloat('{{ job.pickup_lng }}');
+      var pickupLat = parseFloat("{{ job.pickup_lat }}");
+      var pickupLng = parseFloat("{{ job.pickup_lng }}");
 
-      var deliveryLat = parseFloat('{{ job.delivery_lat }}');
-      var deliveryLng = parseFloat('{{ job.delivery_lng }}');
-      
-      
+      var deliveryLat = parseFloat("{{ job.delivery_lat }}");
+      var deliveryLng = parseFloat("{{ job.delivery_lng }}");
+
       function initMapByType(type, initLat, initLng) {
-        const map = new google.maps.Map(document.getElementById(type + "-map"), {
-          center: { lat: initLat || -1.1821, lng: initLng || 36.9366 },
-          zoom: 15,
-          mapTypeControl: false,
-        });
+        const map = new google.maps.Map(
+          document.getElementById(type + "-map"),
+          {
+            center: { lat: initLat || -1.1821, lng: initLng || 36.9366 },
+            zoom: 15,
+            mapTypeControl: false,
+          }
+        );
 
         if (initLat && initLng) {
           new google.maps.Marker({
             position: new google.maps.LatLng(initLat, initLng),
             map: map,
-          })
+          });
         }
-
 
         const input = document.getElementById("id_" + type + "_address");
         const biasInputElement = document.getElementById("use-location-bias");
@@ -365,7 +394,6 @@
           strictBounds: false,
           types: ["establishment"],
         };
-
 
         const autocomplete = new google.maps.places.Autocomplete(
           input,
@@ -378,10 +406,17 @@
         autocomplete.bindTo("bounds", map);
 
         // set the data fields to return when the user selects a place
-        autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
+        autocomplete.setFields([
+          "address_components",
+          "geometry",
+          "icon",
+          "name",
+        ]);
 
         const infowindow = new google.maps.InfoWindow();
-        const infowindowContent = document.getElementById(type + "-infowindow-content");
+        const infowindowContent = document.getElementById(
+          type + "-infowindow-content"
+        );
 
         infowindow.setContent(infowindowContent);
 
@@ -417,20 +452,31 @@
           marker.setVisible(true);
           let address = "";
 
-          if (place.address_components){
+          if (place.address_components) {
             address = [
-              (place.address_components[0] && place.address_components[0].short_name) || "",
-              (place.address_components[1] && place.address_components[1].short_name) || "",
-              (place.address_components[2] && place.address_components[2].short_name) || "",
+              (place.address_components[0] &&
+                place.address_components[0].short_name) ||
+                "",
+              (place.address_components[1] &&
+                place.address_components[1].short_name) ||
+                "",
+              (place.address_components[2] &&
+                place.address_components[2].short_name) ||
+                "",
             ].join(" ");
             // Set the lat and lng values in the respective hidden input fields
-            document.getElementById(type + "_lat").value = place.geometry.location.lat();
-            document.getElementById(type + "_lng").value = place.geometry.location.lng();
+            document.getElementById(type + "_lat").value =
+              place.geometry.location.lat();
+            document.getElementById(type + "_lng").value =
+              place.geometry.location.lng();
           }
 
-          infowindowContent.children[type + "-place-icon"].textContent = place.icon;
-          infowindowContent.children[type + "-place-name"].textContent = place.name;
-          infowindowContent.children[type + "-place-address"].textContent = place.formatted_address;
+          infowindowContent.children[type + "-place-icon"].textContent =
+            place.icon;
+          infowindowContent.children[type + "-place-name"].textContent =
+            place.name;
+          infowindowContent.children[type + "-place-address"].textContent =
+            place.formatted_address;
           infowindow.open(map, marker);
 
           $("#" + type + "_lat").val(place.geometry.location.lat());
@@ -439,53 +485,53 @@
 
         // Sets a listener on a radio button to change the filter type on Places
         // Autocomplete.
-      //   function setupClickListener(id, types) {
-      //     const radioButton = document.getElementById(id);
+        //   function setupClickListener(id, types) {
+        //     const radioButton = document.getElementById(id);
 
-      //     radioButton.addEventListener("click", () => {
-      //       autocomplete.setTypes(types);
-      //       input.value = "";
-      //     });
-      //   }
+        //     radioButton.addEventListener("click", () => {
+        //       autocomplete.setTypes(types);
+        //       input.value = "";
+        //     });
+        //   }
 
-      //   setupClickListener("changetype-all", []);
-      //   setupClickListener("changetype-address", ["address"]);
-      //   setupClickListener("changetype-establishment", ["establishment"]);
-      //   setupClickListener("changetype-geocode", ["geocode"]);
-      //   setupClickListener("changetype-cities", ["(cities)"]);
-      //   setupClickListener("changetype-regions", ["(regions)"]);
-      //   biasInputElement.addEventListener("change", () => {
-      //     if (biasInputElement.checked) {
-      //       autocomplete.bindTo("bounds", map);
-      //     } else {
-      //       // User wants to turn off location bias, so three things need to happen:
-      //       // 1. Unbind from map
-      //       // 2. Reset the bounds to whole world
-      //       // 3. Uncheck the strict bounds checkbox UI (which also disables strict bounds)
-      //       autocomplete.unbind("bounds");
-      //       autocomplete.setBounds({
-      //         east: 180,
-      //         west: -180,
-      //         north: 90,
-      //         south: -90,
-      //       });
-      //       strictBoundsInputElement.checked = biasInputElement.checked;
-      //     }
+        //   setupClickListener("changetype-all", []);
+        //   setupClickListener("changetype-address", ["address"]);
+        //   setupClickListener("changetype-establishment", ["establishment"]);
+        //   setupClickListener("changetype-geocode", ["geocode"]);
+        //   setupClickListener("changetype-cities", ["(cities)"]);
+        //   setupClickListener("changetype-regions", ["(regions)"]);
+        //   biasInputElement.addEventListener("change", () => {
+        //     if (biasInputElement.checked) {
+        //       autocomplete.bindTo("bounds", map);
+        //     } else {
+        //       // User wants to turn off location bias, so three things need to happen:
+        //       // 1. Unbind from map
+        //       // 2. Reset the bounds to whole world
+        //       // 3. Uncheck the strict bounds checkbox UI (which also disables strict bounds)
+        //       autocomplete.unbind("bounds");
+        //       autocomplete.setBounds({
+        //         east: 180,
+        //         west: -180,
+        //         north: 90,
+        //         south: -90,
+        //       });
+        //       strictBoundsInputElement.checked = biasInputElement.checked;
+        //     }
 
-      //     input.value = "";
-      //   });
-      //   strictBoundsInputElement.addEventListener("change", () => {
-      //     autocomplete.setOptions({
-      //       strictBounds: strictBoundsInputElement.checked,
-      //     });
-      //     if (strictBoundsInputElement.checked) {
-      //       biasInputElement.checked = strictBoundsInputElement.checked;
-      //       autocomplete.bindTo("bounds", map);
-      //     }
+        //     input.value = "";
+        //   });
+        //   strictBoundsInputElement.addEventListener("change", () => {
+        //     autocomplete.setOptions({
+        //       strictBounds: strictBoundsInputElement.checked,
+        //     });
+        //     if (strictBoundsInputElement.checked) {
+        //       biasInputElement.checked = strictBoundsInputElement.checked;
+        //       autocomplete.bindTo("bounds", map);
+        //     }
 
-      //     input.value = "";
-      //   });
-       }
+        //     input.value = "";
+        //   });
+      }
 
       function initMap() {
         initMapByType("pickup", pickupLat, pickupLng);
