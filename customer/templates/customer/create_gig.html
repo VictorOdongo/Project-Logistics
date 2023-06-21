@@ -210,9 +210,9 @@
                       </div>
                       <div class="col-lg-4">
                         <div id="pickup-map"></div>
-                        <div id="infowindow-content">
-                          <span id="place-name" class="title"></span><br />
-                          <span id="place-address"></span>
+                        <div id="pickup-infowindow-content">
+                          <span id="pickup-place-name" class="title"></span><br />
+                          <span id="pickup-place-address"></span>
                         </div>
                       </div>
                     </div>
@@ -236,6 +236,35 @@
               aria-labelledby="pills-delivery-tab"
             >
               <h1>Delivery</h1>
+
+              <form method="POST" action="" enctype="multipart/form-data">
+                <b class="text-secondary">Delivery Information</b><br />
+                <div class="card bg-white mt-2 mb-5">
+                  <div class="card-body">
+                    
+                    <div class="row">
+                      <div class="col-lg-8">
+                        {% csrf_token %} {% bootstrap_form step3_form exclude='delivery_lat, delivery_lng' %}
+                        <input hidden id="delivery_lat" name="delivery_lat" value="{{ job.delivery_lat }}">
+                        <input hidden id="delivery_lng" name="delivery_lng" value="{{ job.delivery_lng }}">
+                      </div>
+                      <div class="col-lg-4">
+                        <div id="delivery-map"></div>
+                        <div id="delivery-infowindow-content">
+                          <span id="delivery-place-name" class="title"></span><br />
+                          <span id="delivery-place-address"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" name="step" value="3" />
+                <button type="button" class="btn btn-info"
+                onclick="$('#pills-info-tab').tab('show');">Back</button>
+                <button type="submit" class="btn btn-info">
+                  Save & Continue
+                </button>
+              </form>
 
               <!-- <form method="POST" action="" enctype="multipart/form-data">
                 <b class="text-secondary">Delivery Information</b><br />

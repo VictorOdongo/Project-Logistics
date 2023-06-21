@@ -74,7 +74,7 @@ def create_gig(request):
     creating_job = Job.objects.filter(customer=current_customer, status=Job.CREATING_STATUS).last()
     step1_form = forms.JobCreateStep1Form(instance=creating_job)
     step2_form = forms.JobCreateStep2Form(instance=creating_job)
-    # step3_form = forms.JobCreateStep3Form(instance=creating_job)
+    step3_form = forms.JobCreateStep3Form(instance=creating_job)
 
     
     if request.method == "POST":
@@ -164,7 +164,7 @@ def create_gig(request):
         "step": current_step,
         "step1_form": step1_form,
         "step2_form": step2_form,
-        # "step3_form": step3_form,
+        "step3_form": step3_form,
         # "GOOGLE_MAP_API_KEY": settings.GOOGLE_MAP_API_KEY
 
     })
