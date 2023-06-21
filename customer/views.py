@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from customer import forms
-from django.contrib import messages as message_profile
+from django.contrib import messages 
 from django.conf import settings
 from customer.models import *
 
@@ -41,7 +41,7 @@ def profile_page(request):
                 user_form.save()
                 customer_form.save()
 
-                message_profile.success(request, 'Your profile has been updated')
+                messages.success(request, 'Your profile has been updated')
                 return redirect(reverse('customer:profile'))
 
         elif request.POST.get('action') == 'update_password':
@@ -50,7 +50,7 @@ def profile_page(request):
                 user = password_form.save()
                 update_session_auth_hash(request, user)
 
-                message_profile.success(request, 'Your password has been updated')
+                messages.success(request, 'Your password has been updated')
                 return redirect(reverse('customer:profile'))
 
         # elif request.POST.get('action') == 'update_phone':
@@ -96,19 +96,27 @@ def create_gig(request):
         elif request.POST.get('step') == '3':
             step3_form = forms.JobCreateStep3Form(request.POST, instance=creating_job)
             if step3_form.is_valid():
+                creating_job = step3_form.save()
+
                 try:
                     r = requests.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins={}&destinations={}&mode=transit&key={}".format(
                     creating_job.pickup_address,
                     creating_job.delivery_address,
-                    settings.GOOGLE_API_KEY,
+                    settings.GOOGLE_MAP_API_KEY,
                 ))
-                    print(r.json()['row'])    
+                    print(r.json()['rows'])
+                    
+                    distance = r.json()['rows'][0]['elements'][0]['distance']['value']
+                    duration = r.json()['rows'][0]['elements'][0]['duration']['value']
+                    creating_job.distance = round(distance / 1000, 2)
+                    creating_job.duration = int(duration / 60)
+                    creating_job.price = creating_job.distance * 1  # $1 per Km
+                    creating_job.save()
+                                         
                 except Exception as e:
                     print(e)
                     messages.error(request, "Unfortunately, we do not support deliveries at this distance.")
-
-                
-                # creating_job = step3_form.save()
+               
                 return redirect(reverse('customer:create_gig'))
             
             
@@ -128,6 +136,7 @@ def create_gig(request):
         "step1_form": step1_form,
         "step2_form": step2_form,
         "step3_form": step3_form,
+        "GOOGLE_MAP_API_KEY": settings.GOOGLE_MAP_API_KEY
 
     })
        
