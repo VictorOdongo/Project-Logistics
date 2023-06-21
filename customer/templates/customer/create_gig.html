@@ -222,10 +222,8 @@
                       <div class="col-lg-4">
                         <div id="pickup-map"></div>
                         <div id="pickup-infowindow-content">
-                          <span id="place-icon"></span>
                           <!-- <img src="" width="16" height="16" id="pickup-place-icon" /> -->
-                          <span id="pickup-place-name" class="title"></span
-                          ><br />
+                          <span id="pickup-place-name" class="title"></span><br />
                           <span id="pickup-place-address"></span>
                         </div>
                       </div>
@@ -247,7 +245,6 @@
             </div>
 
             <!-- step 3 -->
-
             <div
               class="tab-pane fade {% if step == 3 %}show active{% endif %}"
               id="pills-delivery"
@@ -280,7 +277,6 @@
                       <div class="col-lg-4">
                         <div id="delivery-map"></div>
                         <div id="delivery-infowindow-content">
-                          <span id="delivery-place-icon"></span>
                           <!-- <img src="" width="16" height="16" id="delivery-place-icon" /> -->
                           <span id="delivery-place-name" class="title"></span
                           ><br />
@@ -362,11 +358,11 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      var pickupLat = parseFloat("{{ job.pickup_lat }}");
-      var pickupLng = parseFloat("{{ job.pickup_lng }}");
+      var pickupLat = parseFloat('{{ job.pickup_lat }}');
+      var pickupLng = parseFloat('{{ job.pickup_lng }}');
 
-      var deliveryLat = parseFloat("{{ job.delivery_lat }}");
-      var deliveryLng = parseFloat("{{ job.delivery_lng }}");
+      var deliveryLat = parseFloat('{{ job.delivery_lat }}');
+      var deliveryLng = parseFloat('{{ job.delivery_lng }}');
 
       function initMapByType(type, initLat, initLng) {
         const map = new google.maps.Map(
@@ -414,9 +410,7 @@
         ]);
 
         const infowindow = new google.maps.InfoWindow();
-        const infowindowContent = document.getElementById(
-          type + "-infowindow-content"
-        );
+        const infowindowContent = document.getElementById(type + "-infowindow-content");
 
         infowindow.setContent(infowindowContent);
 
@@ -471,12 +465,9 @@
               place.geometry.location.lng();
           }
 
-          infowindowContent.children[type + "-place-icon"].textContent =
-            place.icon;
-          infowindowContent.children[type + "-place-name"].textContent =
-            place.name;
-          infowindowContent.children[type + "-place-address"].textContent =
-            place.formatted_address;
+          infowindowContent.children[type + "-place-icon"].textContent = place.icon;
+          infowindowContent.children[type + "-place-name"].textContent = place.name;
+          infowindowContent.children[type + "-place-address"].textContent = place.formatted_address;
           infowindow.open(map, marker);
 
           $("#" + type + "_lat").val(place.geometry.location.lat());
