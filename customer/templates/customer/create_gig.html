@@ -31,7 +31,7 @@
       #pills-tab a.active {
         color: #0dcaf0;
       }
-      #pickup-map {
+      #pickup-map, #delivery-map {
         height: 100%;
       }
     </style>
@@ -373,27 +373,27 @@
       var pickupLat = parseFloat('{{ job.pickup_lat }}');
       var pickupLng = parseFloat('{{ job.pickup_lng }}');
 
-      // var deliveryLat = parseFloat('{{ job.delivery_lat }}');
-      // var deliveryLng = parseFloat('{{ job.delivery_lng }}');
+      var deliveryLat = parseFloat('{{ job.delivery_lat }}');
+      var deliveryLng = parseFloat('{{ job.delivery_lng }}');
 
-      function initMap() {
+      function initMapByType(type, initLat, initLng) {
         const map = new google.maps.Map(
-          document.getElementById("pickup-map"),
+          document.getElementById(type + "-map"),
           {
-            center: { lat: pickupLat || -1.1821, lng: pickupLng || 36.9366 },
+            center: { lat: initLat || -1.1821, lng: initLng || 36.9366 },
             zoom: 15,
             mapTypeControl: false,
           }
         );
 
-        if (pickupLat && pickupLng) {
+        if (initLat && initLng) {
           new google.maps.Marker({
-            position: new google.maps.LatLng(pickupLat, pickupLng),
+            position: new google.maps.LatLng(initLat, initLng),
             map: map,
           });
         }
 
-        const input = document.getElementById("id_pickup_address");
+        const input = document.getElementById("id_" + type + "_address");
         const biasInputElement = document.getElementById("use-location-bias");
         const strictBoundsInputElement =
           document.getElementById("use-strict-bounds");
@@ -422,7 +422,7 @@
         ]);
 
         const infowindow = new google.maps.InfoWindow();
-        const infowindowContent = document.getElementById("infowindow-content");
+        const infowindowContent = document.getElementById(type + "-infowindow-content");
 
         infowindow.setContent(infowindowContent);
 
@@ -477,13 +477,13 @@
               place.geometry.location.lng();
           }
 
-          infowindowContent.children["pickup-place-icon"].textContent = place.icon;
-          infowindowContent.children["pickup-place-name"].textContent = place.name;
-          infowindowContent.children["pickup-place-address"].textContent = place.formatted_address;
+          infowindowContent.children[type + "-place-icon"].textContent = place.icon;
+          infowindowContent.children[type + "-place-name"].textContent = place.name;
+          infowindowContent.children[type + "-place-address"].textContent = place.formatted_address;
           infowindow.open(map, marker);
 
-          $("#pickup_lat").val(place.geometry.location.lat());
-          $("#pickup_lng").val(place.geometry.location.lng());
+          $("#" + type +"_lat").val(place.geometry.location.lat());
+          $("#" + type +"_lng").val(place.geometry.location.lng());
         });
 
         // Sets a listener on a radio button to change the filter type on Places
@@ -536,10 +536,10 @@
         //   });
       }
 
-      // function initMap() {
-      //   initMapByType("pickup", pickupLat, pickupLng);
-      //   initMapByType("delivery", deliveryLat, deliveryLng);
-      // }
+      function initMap() {
+        initMapByType("pickup", pickupLat, pickupLng);
+        initMapByType("delivery", deliveryLat, deliveryLng);
+      }
       window.initMap = initMap;
     </script>
   </body>
