@@ -67,6 +67,7 @@ def profile_page(request):
     
     
     # Job posting
+
 @login_required(login_url="/sender-login/")
 def create_gig(request):
     current_customer =request.user.personal
@@ -152,8 +153,8 @@ def create_gig(request):
     #Determine the current step
     if not creating_job:
         current_step = 1
-    # elif creating_job.delivery_name:
-    #     current_step = 4
+    elif creating_job.delivery_name:
+        current_step = 4
     elif creating_job.pickup_name:
         current_step = 3
     else:
@@ -171,9 +172,39 @@ def create_gig(request):
        
        
     # Payment method 
+
 @login_required(login_url="/sender-login/")
 def payment_method(request):     
     return render(request, 'customer/payment_method.html')
+
+@login_required(login_url="/sender-login/")
+def current_jobs(request):
+    jobs =Job.objects.filter(
+        customer=request.user.personal,
+         status__in=[
+            Job.PROCESSING_STATUS,
+            Job.PICKING_STATUS,
+            Job.DELIVERING_STATUS
+        ]
+    )
+    
+    return render(request, 'customer/jobs.html', {
+        "jobs": jobs
+    })
+
+@login_required(login_url="/sender-login/")
+def archived_jobs(request):
+    jobs =Job.objects.filter(
+        customer=request.user.customer,
+        status_in=[
+            Job.COMPLETED_STATUS,
+            Job.CANCELLED_STATUS
+        ]
+    )
+    
+    return render(request, 'customer/jobs.html', {
+        "jobs": jobs
+    })
                 
 
 

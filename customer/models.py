@@ -37,10 +37,10 @@ class Job(models.Model):
         (CANCELLED_STATUS, 'Cancelled'),              
     )
 
-    CUSTOMER_CHOICES = (
-            ('personal', 'Personal'),
-            ('entreprise', 'Entreprise'),
-        )
+    # CUSTOMER_CHOICES = (
+    #         ('personal', 'Personal'),
+    #         ('entreprise', 'Entreprise'),
+    #     )
     
     # step 1
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
