@@ -22,7 +22,7 @@
     {% if jobs %}
 
     {% for job in jobs %}
-    <a href="#" class="list-group-item list-group-item-action">
+    <a href="{% url 'customer:job' job.id %}" class="list-group-item list-group-item-action">
         <div class="media">
             <img src="{{ job.photo.url }}" class="rounded-lg mr-3" width="100" height="100">
             <div class="media-body">

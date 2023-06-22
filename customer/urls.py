@@ -13,6 +13,8 @@ urlpatterns = [
     
     path('jobs/current/', views.current_jobs, name="current_jobs"),
     path('jobs/archived/', views.archived_jobs, name="archived_jobs"),
+    path('jobs/<job_id>/', views.job_page, name="job"),
+
 ]
 
 if settings.DEBUG:

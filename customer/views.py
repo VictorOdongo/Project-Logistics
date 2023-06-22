@@ -201,7 +201,7 @@ def current_jobs(request):
         ]
     )
     
-    return render(request, 'customer/jobs.html', {
+    return render(request, 'customer/gigs.html', {
         "jobs": jobs
     })
 
@@ -215,9 +215,18 @@ def archived_jobs(request):
         ]
     )
     
-    return render(request, 'customer/jobs.html', {
+    return render(request, 'customer/gigs.html', {
         "jobs": jobs
     })
+    
+    
+@login_required(login_url="/sender-login/")
+def job_page(request, job_id):
+    job =Job.objects.get(id=job_id)
+    return render(request, 'customer/job.html', {
+        "job": job
+    })
+    
                 
 
 
