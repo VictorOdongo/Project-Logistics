@@ -75,10 +75,10 @@
             </div>
 
             <ul class="list-group mt-5">
-              <a href="{% url 'customer:create_gig' %}" class="list-group-item list-group-item-action {% if request.path == create_gig_url %}active btn-info{% endif %}">Post Delivery Gig</a>
-              <a href="{% url 'customer:current_jobs' %}" class="list-group-item list-group-item-action {% if request.path == current_jobs_url or request.path == archived_jobs_url %}active btn-info{% endif %}">My Gigs</a>
-              <a href="{% url 'customer:profile' %}" class="list-group-item list-group-item-action {% if request.path == profile_url %}active btn-info{% endif %}">Profile Details</a>
-              <a href="{% url 'customer:payment_method' %}" class="list-group-item list-group-item-action {% if request.path == payment_method_url %}active btn-info{% endif %}">Payment Details</a>
+              <a href="{% url 'customer:create_gig' %}" class="list-group-item list-group-item-action {% if request.path == create_gig_url %}active btn-info{% else %}text-dark{% endif %}">Post Delivery Gig</a>
+              <a href="{% url 'customer:current_jobs' %}" class="list-group-item list-group-item-action {% if request.path == current_jobs_url or request.path == archived_jobs_url %}active btn-info{% else %}text-dark{% endif %}">My Gigs</a>
+              <a href="{% url 'customer:profile' %}" class="list-group-item list-group-item-action {% if request.path == profile_url %}active btn-info{% else %}text-dark{% endif %}">Profile Details</a>
+              <a href="{% url 'customer:payment_method' %}" class="list-group-item list-group-item-action {% if request.path == payment_method_url %}active btn-info{% else %}text-dark{% endif %}">Payment Details</a>
             </ul>
 
           </div>

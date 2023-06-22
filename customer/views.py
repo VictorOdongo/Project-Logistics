@@ -208,8 +208,8 @@ def current_jobs(request):
 @login_required(login_url="/sender-login/")
 def archived_jobs(request):
     jobs =Job.objects.filter(
-        customer=request.user.customer,
-        status_in=[
+        customer=request.user.personal,
+        status__in=[
             Job.COMPLETED_STATUS,
             Job.CANCELLED_STATUS
         ]
