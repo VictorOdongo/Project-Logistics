@@ -1,4 +1,4 @@
-# import requests
+import requests
 # import stripe
 # import firebase_admin
 
@@ -111,29 +111,29 @@ def create_gig(request):
             if step3_form.is_valid():
                 creating_job = step3_form.save()
 
-                # try:
-                #     r = requests.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins={}&destinations={}&mode=transit&key={}".format(
-                #     creating_job.pickup_address,
-                #     creating_job.delivery_address,
-                #     settings.GOOGLE_MAP_API_KEY,
-                # ))
-                #     print(r.json()['rows'])
+                try:
+                    r = requests.get("https://maps.googleapis.com/maps/api/distancematrix/json?origins={}&destinations={}&mode=transit&key={}".format(
+                    creating_job.pickup_address,
+                    creating_job.delivery_address,
+                    settings.GOOGLE_MAP_API_KEY,
+                ))
+                    print(r.json()['rows'])
                     
-                #     distance = r.json()['rows'][0]['elements'][0]['distance']['value']
-                #     duration = r.json()['rows'][0]['elements'][0]['duration']['value']
-                #     creating_job.distance = round(distance / 1000, 2)
-                #     creating_job.duration = int(duration / 60)
-                #     creating_job.price = creating_job.distance * 1  # $1 per Km
-                #     creating_job.save()
+                    distance = r.json()['rows'][0]['elements'][0]['distance']['value']
+                    duration = r.json()['rows'][0]['elements'][0]['duration']['value']
+                    creating_job.distance = round(distance / 1000, 2)
+                    creating_job.duration = int(duration / 60)
+                    creating_job.price = creating_job.distance * 1  # $1 per Km
+                    creating_job.save()
                                          
-                # except Exception as e:
-                #     print(e)
-                #     messages.error(request, "Unfortunately, we do not support deliveries at this distance.")
+                except Exception as e:
+                    print(e)
+                    messages.error(request, "Unfortunately, we do not support deliveries at this distance.")
                
                 return redirect(reverse('customer:create_gig'))
             
-        # elif request.POST.get('step') == '4':
-        #     if creating_job.price:
+        elif request.POST.get('step') == '4':
+            if creating_job.price:
         #         try:
         #             payment_intent = stripe.PaymentIntent.create(
         #                 amount=int(creating_job.price * 100),
@@ -154,7 +154,7 @@ def create_gig(request):
         #             creating_job.status = Job.PROCESSING_STATUS
         #             creating_job.save()
                     
-        #             return redirect(reverse('customer:sendgig'))
+                    return redirect(reverse('customer:sendgig'))
                     
         #         except stripe.error.CardError as e:
         #             err = e.error
@@ -223,8 +223,15 @@ def archived_jobs(request):
 @login_required(login_url="/sender-login/")
 def job_page(request, job_id):
     job =Job.objects.get(id=job_id)
+    
+    if request.method == "POST" and job.status == Job.PROCESSING_STATUS:
+        job.status = Job.CANCELLED_STATUS
+        job.save()
+        return redirect(reverse('customer:archived_jobs'))
+    
     return render(request, 'customer/job.html', {
-        "job": job
+        "job": job,
+        "GOOGLE_MAP_API_KEY": settings.GOOGLE_MAP_API_KEY
     })
     
                 

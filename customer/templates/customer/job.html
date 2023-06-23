@@ -1,4 +1,5 @@
-{% extends 'customer/sendgig.html' %} {% block head %}
+{% extends 'customer/sendgig.html' %}
+{% load static %} {% block head %}
 
 <style>
   .photo {
@@ -18,6 +19,8 @@
   }
 </style>
 
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap&libraries=places&v=weekly"></script>
+
 <script>
 
     var pickupLat = parseFloat(" {{ job.pickup_lat }} ");
@@ -25,8 +28,6 @@
 
     var deliveryLat = parseFloat(" {{ job.delivery_lat }} ");
     var deliveryLng = parseFloat(" {{ job.delivery_lng }} ");
-
-
 
   function initMap() {
     const directionsService = new google.maps.DirectionsService();
@@ -68,6 +69,14 @@
     height="150"
   />
   <div class="media-body">
+
+    {% if job.status == 'processing' %}
+    <form method="POST" class="float-right">
+      {% csrf_token %}
+      <button type="submit"class=btn btn-warning>Cancel Job</button>
+    </form>
+    {% endif %}
+
     <h4>{{ job.name }}</h4>
     <p class="text-secondary">{{ job.description }}</p>
 
