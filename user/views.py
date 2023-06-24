@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
-from .models import Personal, Entreprise, Driver
+from .models import Personal, Driver
 
 
 def home_view(request):
@@ -95,58 +95,7 @@ def sender_login(request):
 def logout(request):
     auth_logout(request)
     return redirect('/')
-
-
- # Enterprise views
- # Handle enterprise signup form submission          
-def entreprise_signup(request):
-    if request.method == 'POST':
-        bizname = request.POST['bizname']
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
-        mobile = request.POST['mobile']
-        email = request.POST['email']
-        password = request.POST['password']
-        
-        if User.objects.filter(email=email).exists():
-            messages.info(request, 'email already exists!')
-            return redirect('/entreprise-signup')
-        elif User.objects.filter(username=bizname).exists():
-            messages.info(request, 'business name taken!')
-            return redirect('/entreprise-signup')
-        
-        else:
-            user = User.objects.create_user(
-            username=bizname,
-            email=email,
-            password=password
-        )
-            user.first_name = firstname
-            user.last_name = lastname
-            user.mobile = mobile
-            user.save()
-            
-        personal = Entreprise.objects.create(
-                user=user,
-                business_name=bizname,
-                firstname=firstname,
-                lastname=lastname,
-                mobile=mobile,
-                email=email,
-                password=password
-            )
-        user.set_password(password)
-        personal.save()
-        subject = 'welcome to DriveX!'
-        message = f'Hello {user.username}, thank you for signing up fo DriveX delivery service.'
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [user.email, ]
-        send_mail( subject, message, email_from, recipient_list )
-        return redirect('/sender-login')
-        
-    else:
-         return render(request, 'user/entreprise-signup.html')
-
+     
 
 # Driver views
 # Handle driver signup form submission
