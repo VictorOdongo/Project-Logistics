@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Personal
-from .models import Entreprise
-from .models import Driver
+from . import models
+# from .models import Personal
+# from .models import Entreprise
+# from .models import Driver
 
 
-admin.site.register(Personal)
-admin.site.register(Entreprise)
-admin.site.register(Driver)
+admin.site.register(models.Personal)
+admin.site.register(models.Entreprise)
+admin.site.register(models.Driver)
 
