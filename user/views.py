@@ -126,7 +126,7 @@ def driver_signup(request):
             user.mobile = mobile
             user.save()
             
-        personal = Driver.objects.create(
+        driver = Driver.objects.create(
                 user=user,
                 firstname=firstname,
                 lastname=lastname,
@@ -136,7 +136,7 @@ def driver_signup(request):
                 password=password
             )
         user.set_password(password)
-        personal.save()
+        driver.save()
         subject = 'welcome to DriveX!'
         message = f'Hello {user.username}, thank you for signing up fo DriveX delivery service.'
         email_from = settings.EMAIL_HOST_USER
@@ -157,7 +157,7 @@ def drive_login(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/drivegig')
+            return redirect('driver:drivegig')
         else:
             messages.error(request, 'Invalid credentials!')
             return redirect('user:driver-login')
