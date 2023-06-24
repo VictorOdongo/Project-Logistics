@@ -64,16 +64,6 @@ def personal_signup(request):
     else:     
         return render(request, 'user/personal-signup.html')
     
-#Send welcome email to new user
-# def send_welcome_email(user_email, user_name):
-#     subject = 'Welcome to DriveX'
-#     html_message = render_to_string('user/welcome_email.html', {'user_name': user_name})
-#     plain_message = strip_tags(html_message)
-#     from_email = settings.EMAIL_HOST_USER
-#     to_email = user_email
-
-#     send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
-    
 # Handle personal login form submission
 # Perform authentication and login logic for personal user
 def sender_login(request):
