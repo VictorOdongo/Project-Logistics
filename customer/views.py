@@ -27,7 +27,7 @@ def profile_page(request):
     if request.method == 'POST':
         user_form = forms.BasicUserForm(request.POST, instance=request.user)
         customer_form = forms.BasicCustomerForm(request.POST, request.FILES, instance=request.user)
-        password_form = PasswordChangeForm(request.user)
+        # password_form = PasswordChangeForm(request.user)
 
     if request.method == "POST":
         if request.POST.get('action') == 'update_profile':
@@ -43,14 +43,14 @@ def profile_page(request):
                 messages.success(request, 'Your profile has been updated')
                 return redirect(reverse('customer:profile'))
 
-        elif request.POST.get('action') == 'update_password':
-            password_form = PasswordChangeForm(request.user, request.POST)
-            if password_form.is_valid():
-                user = password_form.save()
-                update_session_auth_hash(request, user)
+        # elif request.POST.get('action') == 'update_password':
+        #     password_form = PasswordChangeForm(request.user, request.POST)
+        #     if password_form.is_valid():
+        #         user = password_form.save()
+        #         update_session_auth_hash(request, user)
 
-                messages.success(request, 'Your password has been updated')
-                return redirect(reverse('customer:profile'))
+        #         messages.success(request, 'Your password has been updated')
+        #         return redirect(reverse('customer:profile'))
 
         # elif request.POST.get('action') == 'update_phone':
         #     # Get Firebase user data
@@ -179,7 +179,7 @@ def create_gig(request):
         "step1_form": step1_form,
         "step2_form": step2_form,
         "step3_form": step3_form,
-        # "GOOGLE_MAP_API_KEY": settings.GOOGLE_MAP_API_KEY
+        "GOOGLE_MAP_API_KEY": settings.GOOGLE_MAP_API_KEY
 
     })
        
