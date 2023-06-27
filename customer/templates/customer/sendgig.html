@@ -10,95 +10,66 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>/Send item</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <div style="background-color: #dfe9f5">
-      <nav
-        class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-dark"
-        style="background-color: #333"
-      >
-        <div class="container-fluid">
-          <h1 class="text-white">DriveXpress</h1>
-        </div>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" href="#"
-              >Welcome</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" href="#"
-              >{{user.username}}!</a
-            >
-          </li>
-          <a href="{% url 'user:logout' %}"
-            ><button
-              class="btn btn-info btn-lg"
-              type="submit"
-              style="width: 100px; height: 45px"
-            >
-              Logout
-            </button></a
-          >
-        </ul>
-      </nav>
-      <h2 class="text-center">Make your delivery request anytime, anywhere!</h2>
-      <div>
-        {% for message in message_profile %}
-        <h5 style="color: goldenrod">{{message}}</h5>
-        {% endfor %}
-      </div>
-      <div class="container bg-light mt-4 pt-3 pb-3 text-left rounded-lg">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="text-center">
-              <img
-                src="{% if request.user.customer.avatar %}{{ request.user.customer.avatar.url }}{% else %}{% static 'img/avatar.png' %}{% endif %}"
-                alt=""
-                class="rounded-circle mb-2"
-                width="100"
-                height="100"
-              />
-              <h4>{{ request.user.get_full_name }}</h4>
-              <p class="text-secondary">{{ request.user.email }}</p>
-            </div>
 
-            <ul class="list-group mt-5">
-              <a href="{% url 'customer:create_gig' %}" class="list-group-item list-group-item-action {% if request.path == create_gig_url %}active btn-info{% else %}text-dark{% endif %}">Post Delivery Gig</a>
-              <a href="{% url 'customer:current_jobs' %}" class="list-group-item list-group-item-action {% if request.path == current_jobs_url or request.path == archived_jobs_url %}active btn-info{% else %}text-dark{% endif %}">My Gigs</a>
-              <a href="{% url 'customer:profile' %}" class="list-group-item list-group-item-action {% if request.path == profile_url %}active btn-info{% else %}text-dark{% endif %}">Profile Details</a>
-              <a href="{% url 'customer:payment_method' %}" class="list-group-item list-group-item-action {% if request.path == payment_method_url %}active btn-info{% else %}text-dark{% endif %}">Payment Details</a>
-            </ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>/Send item</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+</head>
 
-          </div>
-          <div class="col-lg-8">{% block main %} {% endblock %}</div>
-        </div>
-      </div>
-      <br />
-      <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
-      <br />
+<body>
+  <div style="background-color: #dfe9f5">
+    
+    <h2 class="text-center">Make your delivery request anytime, anywhere!</h2>
+    <div>
+      {% for message in message_profile %}
+      <h5 style="color: goldenrod">{{message}}</h5>
+      {% endfor %}
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    <div class="container bg-light mt-4 pt-3 pb-3 text-left rounded-lg">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="text-center">
+            <img
+              src="{% if request.user.customer.avatar %}{{ request.user.customer.avatar.url }}{% else %}{% static 'img/avatar.png' %}{% endif %}"
+              alt="" class="rounded-circle mb-2" width="100" height="100" />
+            <h4>{{ request.user.get_full_name }}</h4>
+            <p class="text-secondary">{{ request.user.email }}</p>
+          </div>
+
+          <ul class="list-group mt-5">
+            <a href="{% url 'customer:create_gig' %}"
+              class="list-group-item list-group-item-action {% if request.path == create_gig_url %}active btn-info{% else %}text-dark{% endif %}">Post
+              Delivery Gig</a>
+            <a href="{% url 'customer:current_jobs' %}"
+              class="list-group-item list-group-item-action {% if request.path == current_jobs_url or request.path == archived_jobs_url %}active btn-info{% else %}text-dark{% endif %}">My
+              Gigs</a>
+            <a href="{% url 'customer:profile' %}"
+              class="list-group-item list-group-item-action {% if request.path == profile_url %}active btn-info{% else %}text-dark{% endif %}">Profile
+              Details</a>
+            <a href="{% url 'customer:payment_method' %}"
+              class="list-group-item list-group-item-action {% if request.path == payment_method_url %}active btn-info{% else %}text-dark{% endif %}">Payment
+              Details</a>
+          </ul>
+
+        </div>
+        <div class="col-lg-8">{% block main %} {% endblock %}</div>
+      </div>
+    </div>
+    <br />
+    <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
+    <br />
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
 {% endblock %}

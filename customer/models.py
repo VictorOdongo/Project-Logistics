@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from user.models import Personal
+from driver.models import Courier
 
 
 
@@ -45,6 +46,7 @@ class Job(models.Model):
     # step 1
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Personal, on_delete=models.CASCADE)
+    courier = models.ForeignKey(Courier, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)

@@ -1,31 +1,65 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Get Started</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courier | DriveX</title>
 
-  {% load bootstrap4 %}
-  {% bootstrap_css %}
-  {% bootstrap_javascript jquery='full' %}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
 
-  {% block head %}{% endblock %}
-  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
+    <link rel="stylesheet" href="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.css" />
+
+    {% block head %}{% endblock head %}
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-dark" style="background-color: #333">
-    <div class="container-fluid">
-      <h1 class="text-white">DriveXpress</h1>
-    </div>
-  </nav>
+    <!-- navigation -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-dark" style="background-color: #333">
+      <div class="container-fluid">
+        <h1 class="text-white">DriveXpress</h1>
+      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#" 
+          style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">Hello {{ request.user.get_full_name | title }}!</a>
+        </li>
+        <a href="{% url 'user:logout' %}"><button class="btn btn-info btn-lg" type="submit"
+            style="width: 100px; height: 45px">
+            Logout
+          </button></a>
+      </ul>
+    </nav>
+    <!-- body content -->
+    {% block content %}{% endblock content %}
 
-  {% block content %}{% endblock %}
+    <!-- footer -->
+    <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
+    {% block footercontent %}{% endblock footercontent %}
 
-  <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
+    <!-- scripts -->
+    {% block scripts %}{% endblock scripts %}
+    <script src="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.js"></script>
+    <script>
+        function toast(message, type) {
+            bootoast.toast({
+                position: 'leftBottom',
+                message,
+                type
+            })
+        }
+    </script>
+    {% if messages %}
+    {% for message in messages %}
+    <script>
+        toast('{{ message }}', '{{ message.tags }}')
+    </script>
+    {% endfor %}
+    {% endif %}
 </body>
 
 </html>

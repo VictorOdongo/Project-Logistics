@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 app_name = 'driver'
 
 urlpatterns = [
-    path('drivegig', views.drivegig_view, name='drivegig')
+    path('drivegig', views.drivegig_view, name='drivegig'),
 ]
 
 if settings.DEBUG:
