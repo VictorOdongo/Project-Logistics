@@ -11,10 +11,21 @@
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
 
+    <script>
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    </script>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" />
     <link rel="stylesheet" href="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.css" />
 
-    {% block head %}{% endblock head %}
+    <style>
+      #content {
+            height: calc(var(--vh, 1vh) * 100);
+        }
+    </style>
+
+    {% block head %}{% endblock %}
 </head>
 
 <body>
@@ -35,15 +46,17 @@
       </ul>
     </nav>
     <!-- body content -->
-    {% block content %}{% endblock content %}
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
 
     <!-- footer -->
-    <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
-    {% block footercontent %}{% endblock footercontent %}
+    <!-- <footer class="text-center mt-5 mb-5">&copy; DriveX.com</footer>
+    {% block footercontent %}{% endblock footercontent %} -->
 
     <!-- scripts -->
-    {% block scripts %}{% endblock scripts %}
-    <script src="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.js"></script>
+    <!-- {% block scripts %}{% endblock scripts %} -->
+    <!-- <script src="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.js"></script>
     <script>
         function toast(message, type) {
             bootoast.toast({
@@ -59,7 +72,7 @@
         toast('{{ message }}', '{{ message.tags }}')
     </script>
     {% endfor %}
-    {% endif %}
+    {% endif %} -->
 </body>
 
 </html>

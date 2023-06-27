@@ -1,8 +1,38 @@
 {% extends 'driver/base.html' %}
 
+{% block head %}
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAPf-PH9qBF_HugsrYjn_lXTJlFvhE0Wk&callback=initMap&libraries=places&v=weekly"></script>
+<script>
+  function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 13,
+      center: { lat: -1.2921, lng: 36.8219 },
+    });
 
+    // Get available jobs via API
+  }
+
+  // Call initMap when the page finishes loading
+  window.addEventListener("load", function () {
+    initMap();
+  });
+
+</script>
+
+<style>
+  #map {
+    flex: 1;
+  }
+</style>
+
+{% endblock %}
 
 {% block content %}
+
+<div class="d-flex flex-column h-100" style="padding-bottom: 60px;">
+  <div id="map"></div>
+</div>
 
 {% include 'driver/bottom_tabs.html' %}
 
