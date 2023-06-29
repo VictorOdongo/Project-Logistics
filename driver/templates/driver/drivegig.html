@@ -1,8 +1,5 @@
-{% extends 'driver/base.html' %}
-
-{% block head %}
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAPf-PH9qBF_HugsrYjn_lXTJlFvhE0Wk&callback=initMap&libraries=places&v=weekly"></script>
+{% extends 'driver/base.html' %} {% block head %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAPf-PH9qBF_HugsrYjn_lXTJlFvhE0Wk&callback=initMap&libraries=places&v=weekly"></script>
 <script>
   function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
@@ -11,35 +8,55 @@
     });
 
     // Get available jobs via API
-    // fetch("{% url 'driver:available_jobs_api' %}")
-    //         .then(res => res.json())
-    //         .then(json => {
-    //           console.log(json);
-    //         });
-            
+    fetch("{% url 'driver:available_jobs_api' %}")
+      .then((res) => res.json())
+      .then((json) => {
+       //  console.log(json);
+       
+       for (let i=0; i < json.jobs.length; i++) {
+        const job = json.jobs[i]
+        const position = { lat: job.pickup_lat, lng: job.pickup_lng };
+        const marker = new google.maps.Marker({
+                        position: position,
+                        map
+                        });
+
+                    bounds.extend(position)
+
+                    new google.maps.InfoWindow({
+                        content: "<small><b>" + job.name + "</b></small><br /><small>" + job.distance + " Km</small>"
+                    }).open(map, marker)
+
+                    // click event job
+                    marker.addListener("click", () => {
+                        showJobDetails(job)
+                    })
+
+                    map.fitBounds(bounds)
+       }
+
+      })
   }
 
   // Call initMap when the page finishes loading
   window.addEventListener("load", function () {
     initMap();
   });
-
 </script>
 
 <style>
+  .gm-ui-hover-effect {
+    display: !important;
+  }
   #map {
     flex: 1;
   }
 </style>
 
-{% endblock %}
+{% endblock %} {% block content %}
 
-{% block content %}
-
-<div class="d-flex flex-column h-100" style="padding-bottom: 60px;">
+<div class="d-flex flex-column h-100" style="padding-bottom: 60px">
   <div id="map"></div>
 </div>
 
-{% include 'driver/bottom_tabs.html' %}
-
-{% endblock %}
+{% include 'driver/bottom_tabs.html' %} {% endblock %}
