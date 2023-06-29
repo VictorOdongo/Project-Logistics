@@ -18,7 +18,6 @@ def getstarted_view(request):
 # Handle personal signup form submission
 def personal_signup(request):
     if request.method == 'POST':
-        u_name = request.POST['username']
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
         email = request.POST['email']
@@ -28,32 +27,30 @@ def personal_signup(request):
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
             return redirect('/personal-signup')
-        elif User.objects.filter(username=u_name).exists():
+        elif User.objects.filter(username=firstname).exists():
             messages.info(request, 'username taken!')
             return redirect('personal-signup')
         
         else:
             user = User.objects.create_user(
-            username=u_name,
+            username=firstname,
             email=email,
             password=password
         )
-            user.first_name = firstname
             user.last_name = lastname
             user.mobile = mobile
             user.save()
             
         personal = Personal.objects.create(
                 user=user,
-                username=u_name,
-                firstname=firstname,
+                username=firstname,
                 lastname=lastname,
                 mobile=mobile,
                 email=email,
                 password=password
             )
-        user.set_password(password)
-        personal.save()
+        # user.set_password(password)
+        # personal.save()
         subject = 'welcome to DriveX!'
         message = f'Hello {user.username}, thank you for signing up fo DriveX delivery service.'
         email_from = settings.EMAIL_HOST_USER
@@ -93,7 +90,6 @@ def driver_signup(request):
     if request.method == 'POST':
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
-        license = request.POST['license']
         mobile = request.POST['mobile']
         email = request.POST['email']
         password = request.POST['password']
@@ -101,17 +97,16 @@ def driver_signup(request):
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email already exists!')
             return redirect('/driver-signup')
-        elif User.objects.filter(username=license).exists():
+        elif User.objects.filter(username=firstname).exists():
             messages.info(request, 'driver license already exists!')
             return redirect('/driver-signup')
         
         else:
             user = User.objects.create_user(
-            username=license,
+            username=firstname,
             email=email,
             password=password
         )
-            user.first_name = firstname
             user.last_name = lastname
             user.mobile = mobile
             user.save()
@@ -120,13 +115,12 @@ def driver_signup(request):
                 user=user,
                 firstname=firstname,
                 lastname=lastname,
-                license=license,
                 mobile=mobile,
                 email=email,
                 password=password
             )
-        user.set_password(password)
-        driver.save()
+        # user.set_password(password)
+        # driver.save()
         subject = 'welcome to DriveX!'
         message = f'Hello {user.username}, thank you for signing up fo DriveX delivery service.'
         email_from = settings.EMAIL_HOST_USER

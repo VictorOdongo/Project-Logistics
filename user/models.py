@@ -8,7 +8,6 @@ User = get_user_model()
 class Personal(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='customer/avatars/', blank=True, null=True)
-    username = models.CharField(max_length=15, unique=True, blank=False, default='xx234xx')
     firstname = models.CharField(max_length=20, blank=True)
     lastname = models.CharField(max_length=20, blank=False)
     mobile = models.CharField(max_length=50, null=False, blank=False)
@@ -21,9 +20,8 @@ class Personal(models.Model):
     
 class Driver(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=20, blank=False)
-    lastname = models.CharField(max_length=20, blank=False)
-    license = models.CharField(max_length=15, blank=False, primary_key=True, unique=True)
+    firstname = models.CharField(max_length=20, blank=False, null=False)
+    lastname = models.CharField(max_length=20, blank=False, null=False)
     mobile = models.CharField(max_length=20, null=False, blank=False)
     email = models.EmailField(max_length=50, blank=False, unique=True)
     password = models.CharField(max_length=255, blank=False)
