@@ -22,6 +22,31 @@
 
 <body>
   <div style="background-color: #dfe9f5">
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-dark"
+      style="background-color: #333"
+    >
+      <div class="container-fluid">
+        <h1 class="text-white"><a href="{{ request.META.HTTP_REFERER }}" style="color: white; text-decoration: none;">DriveXpress</a></h1>
+      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#"
+            >{{user.username}}!</a
+          >
+        </li>
+        <a href="{% url 'user:logout' %}"
+          ><button
+            class="btn btn-info btn-lg"
+            type="submit"
+            style="width: 100px; height: 45px"
+          >
+            Logout
+          </button></a
+        >
+      </ul>
+    </nav>
     
     <h2 class="text-center">Make your delivery request anytime, anywhere!</h2>
     <div>
