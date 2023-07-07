@@ -108,6 +108,7 @@ def create_gig(request):
             
         elif request.POST.get('step') == '3':
             step3_form = forms.JobCreateStep3Form(request.POST, instance=creating_job)
+            
             if step3_form.is_valid():
                 creating_job = step3_form.save()
 
